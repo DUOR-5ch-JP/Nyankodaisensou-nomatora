@@ -78,7 +78,6 @@ body {
   --tx-grp-d: #ff0000;
 }
 
-/* 親方（ally-gem）とオリジン（org-gem） */
 .ally-gem {
   display: inline-block;
   width: max-content;
@@ -86,13 +85,12 @@ body {
   background-color: #555555;
   border: 1px solid #333333;
 }
+
 .org-gem {
   display: flex;
   align-items: flex-start;
 }
 
-
-/* 盤面本体（dy-maint） */
 .dy-maint {
   display: flex;
   flex-direction: column;
@@ -104,29 +102,25 @@ body {
   line-height: 1.25;
 }
 
-/* 横1行（dy-row） */
 .dy-row {
   display: flex;
   flex-direction: row;
 }
 
-/* 列幅の統一 */
 .dy-num-col {
   width: 38px;
   flex-shrink: 0;
 }
+
 .dy-data-col {
   width: 92px;
   flex-shrink: 0;
 }
-.ally-gem.mode-short2 .dy-data-col {
-  width:  92px;
-}
+
 .ally-gem.mode-en .dy-data-col {
-  width:  100px;
+  width: 100px;
 }
 
-/* 見出しセル（dy-head） */
 .dy-head {
   padding: 4px 2px;
   font-weight: bold;
@@ -136,12 +130,12 @@ body {
   white-space: nowrap;
   box-sizing: border-box;
 }
+
 .dy-num-head {
   background-color: #eee;
   color: #333;
 }
 
-/* 半マスずれスペーサー */
 .dycell-half {
   width: 100%;
   height: 14px;
@@ -151,7 +145,6 @@ body {
   box-sizing: border-box;
 }
 
-/* 1マス外枠（dycell） */
 .dycell {
   display: flex;
   flex-direction: column;
@@ -160,7 +153,6 @@ body {
   box-sizing: border-box;
 }
 
-/* 上段・下段 */
 .dycell-top, .dycell-btm {
   padding: 2px 3px;
   min-height: 19px;
@@ -182,14 +174,15 @@ body {
   color: inherit;
   text-decoration: none;
 }
+
 .dy-link:hover {
   text-decoration: underline;
 }
+
 .dy-dest {
   font-size: 0.72rem;
 }
 
-/* 8グループカラーパレット */
 .grp-x { background-color: var(--bg-grp-x); color: var(--tx-grp-x); }
 .grp-z { background-color: var(--bg-grp-z); color: var(--tx-grp-z); }
 .grp-l { background-color: var(--bg-grp-l); color: var(--tx-grp-l); }
