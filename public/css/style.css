@@ -1,0 +1,219 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #fefefe;
+  color: #222;
+}
+
+.site-header {
+  background-color: #222;
+  color: #fff;
+  padding: 12px 20px;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.site-title {
+  margin: 0;
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+}
+
+.site-title a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.site-nav a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 15px;
+  font-size: 0.95rem;
+}
+
+.main-content {
+  padding: 20px;
+  min-height: 70vh;
+}
+
+.NVA-Duor {
+  background-color: #fff;
+  padding: 30px 20px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.page-main-title {
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.page-body-text p {
+  margin: 10px 0;
+}
+
+:root {
+  --bg-grp-x: #ffbf7f;
+  --tx-grp-x: #000000;
+  --bg-grp-z: #ffffff;
+  --tx-grp-z: #000000;
+  --bg-grp-l: #e8ffd1;
+  --tx-grp-l: #000000;
+  --bg-grp-n: #ffffff;
+  --tx-grp-n: #000000;
+  --bg-grp-b: #a8a8ff;
+  --tx-grp-b: #000000;
+  --bg-grp-t: #ffff93;
+  --tx-grp-t: #000000;
+  --bg-grp-c: #ff9999;
+  --tx-grp-c: #000000;
+  --bg-grp-d: #1f1f1f;
+  --tx-grp-d: #ff0000;
+}
+
+/* 親方（ally-gem）とオリジン（org-gem） */
+.ally-gem {
+  display: inline-block;
+  width: max-content;
+  padding: 1px;
+  background-color: #555555;
+  border: 1px solid #333333;
+}
+.org-gem {
+  display: flex;
+  align-items: flex-start;
+}
+
+
+/* 盤面本体（dy-maint） */
+.dy-maint {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  border-top: 1px solid #888;
+  border-left: 1px solid #888;
+  background-color: #fff;
+  font-size: 0.82rem;
+  line-height: 1.25;
+}
+
+/* 横1行（dy-row） */
+.dy-row {
+  display: flex;
+  flex-direction: row;
+}
+
+/* 列幅の統一 */
+.dy-num-col {
+  width: 38px;
+  flex-shrink: 0;
+}
+.dy-data-col {
+  width: 92px;
+  flex-shrink: 0;
+}
+.ally-gem.mode-short2 .dy-data-col {
+  width:  92px;
+}
+.ally-gem.mode-en .dy-data-col {
+  width:  100px;
+}
+
+/* 見出しセル（dy-head） */
+.dy-head {
+  padding: 4px 2px;
+  font-weight: bold;
+  text-align: center;
+  border-right: 1px solid #888;
+  border-bottom: 1px solid #888;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+.dy-num-head {
+  background-color: #eee;
+  color: #333;
+}
+
+/* 半マスずれスペーサー */
+.dycell-half {
+  width: 100%;
+  height: 14px;
+  border-right: 1px solid #888;
+  border-bottom: 1px solid #888;
+  background-color: #f7f7f7;
+  box-sizing: border-box;
+}
+
+/* 1マス外枠（dycell） */
+.dycell {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #888;
+  border-bottom: 1px solid #888;
+  box-sizing: border-box;
+}
+
+/* 上段・下段 */
+.dycell-top, .dycell-btm {
+  padding: 2px 3px;
+  min-height: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.dynum-top, .dynum-btm {
+  background-color: #f4f4f4;
+  color: #444;
+  font-weight: bold;
+  font-size: 0.75rem;
+  cursor: default;
+}
+
+.dy-link {
+  color: inherit;
+  text-decoration: none;
+}
+.dy-link:hover {
+  text-decoration: underline;
+}
+.dy-dest {
+  font-size: 0.72rem;
+}
+
+/* 8グループカラーパレット */
+.grp-x { background-color: var(--bg-grp-x); color: var(--tx-grp-x); }
+.grp-z { background-color: var(--bg-grp-z); color: var(--tx-grp-z); }
+.grp-l { background-color: var(--bg-grp-l); color: var(--tx-grp-l); }
+.grp-n { background-color: var(--bg-grp-n); color: var(--tx-grp-n); }
+.grp-b { background-color: var(--bg-grp-b); color: var(--tx-grp-b); }
+.grp-t { background-color: var(--bg-grp-t); color: var(--tx-grp-t); }
+.grp-c { background-color: var(--bg-grp-c); color: var(--tx-grp-c); }
+.grp-d { background-color: var(--bg-grp-d); color: var(--tx-grp-d); font-weight: bold; }
+
+.site-footer {
+  border-top: 2px solid #333;
+  padding: 16px 20px;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+
+.copyright {
+  margin: 0 0 4px 0;
+  font-size: 0.9rem;
+}
+
+.powered-by {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: #666;
+}

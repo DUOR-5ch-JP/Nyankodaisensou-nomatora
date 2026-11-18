@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>にゃん大ノマトラ</title>
+  <link rel="stylesheet" id="site-stylesheet" href="/css/style.css">
+  <link rel="icon" id="site-favicon" type="image/png" href="/gazoo/yamime.fcon.png?v=1">
+  <meta name="description" content="にゃんこ大戦争 ノーマルガチャシードトラッカー＆シードファインダー">
+  <meta property="og:title" content="にゃん大ノマトラ - NBW N.GACHA SEED TRACKER">
+  <meta property="og:description" content="PONOSはサイコロをふらない。ノーマルガチャのシード特定・軌道予測ツール。">
+  <meta property="og:type" content="website">
+
+  <script>
+    if (location.pathname.endsWith('.html') || location.protocol === 'file:') {
+      document.getElementById('site-stylesheet').href = './css/style.css';
+      document.getElementById('site-favicon').href = './gazoo/yamime.fcon.png?v=1';
+    }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <h1 class="site-title"><a href="/" data-static="./index.html">NBW N.GACHA SEEDTRACKER</a></h1>
+      <nav class="site-nav">
+        <a href="/" data-static="./index.html">トップ</a>
+        <a href="/nomatora" data-static="./nomatora.html">トラック</a>
+        <a href="/finder" data-static="./finder.html">シード検索</a>
+        <a href="/howto" data-static="./howto.html">使い方</a>
+        <a href="/credits" data-static="./credits.html">クレジット</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <%= yield %>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="copyright">©2026 DUOR◆NYANMA/rK7Ec</p>
+      <p class="powered-by">Powered by Gemini</p>
+    </div>
+  </footer>
+
+  <script>
+    if (location.pathname.endsWith('.html') || location.protocol === 'file:') {
+      document.querySelectorAll('a[data-static]').forEach(function(a) {
+        a.href = a.getAttribute('data-static');
+      });
+    }
+  </script>
+</body>
+</html>

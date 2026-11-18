@@ -1,0 +1,16 @@
+<%
+  preferred_order = ['Normal+', 'Fukubiki', 'FukubikiG', 'Nekome', 'Matatabi', 'Normal']
+
+  six_gachas.sort_by! { |g| preferred_order.index(g['name']) || 999 }
+  true_destiny_data['alpha']&.sort_by! { |r| preferred_order.index(r['title']) || 999 }
+  true_destiny_data['beta']&.sort_by! { |r| preferred_order.index(r['title']) || 999 }
+%>
+<style id="uicustom-wallpaper-style">
+  body {
+    background-image: url('./gazoo/kabegami/rakures2.3.png');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+</style>

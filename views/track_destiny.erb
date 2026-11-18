@@ -1,0 +1,62 @@
+<%
+  gachalist = trackRolls || []
+  numrows = gachalist.empty? ? 0 : gachalist.at(0)['nodes'].length
+%>
+<div class="dy-maint">
+  <div class="dy-row">
+    <div class="dy-head dy-num-col dynum-top"><%= trackLabel %></div>
+    <% gachalist.each do |g| %>
+      <div class="dy-head dy-data-col dynum-top"><%= Translator.formatHeader(g['title'], langMode) %></div>
+    <% end %>
+  </div>
+
+  <% numrows.times do |ridx| %>
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top"><%= ridx + 1 %></div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      <% gachalist.each do |g| %>
+        <%
+          node = g['nodes'].at(ridx)
+          u1 = node['primary']
+          uname1 = u1['id']
+          grp1 = Translator.groupClass(uname1)
+          label1 = Translator.formatLabel(uname1, langMode)
+          href1 = "?#{URI.encode_www_form(baseParams.merge({ 'seed' => NgSeed.step(u1['seed']).to_s, 'lastCat' => uname1 }))}"
+
+          warp = node['warp'] || {}
+          warped = warp['active']
+          u2 = node['fallback']
+
+          if warped && u2
+            uname2 = u2['id']
+            grp2 = Translator.groupClass(uname2)
+            label2 = Translator.formatLabel(uname2, langMode)
+            href2 = "?#{URI.encode_www_form(baseParams.merge({ 'seed' => NgSeed.step(u2['seed']).to_s, 'lastCat' => uname2 }))}"
+          end
+        %>
+        <div class="dycell dy-data-col">
+          <% if warped && u2 %>
+            <div class="dycell-top <%= grp1 %>">
+              <a href="<%= href1 %>" class="dy-link"><%= label1 %></a>
+            </div>
+            <div class="dycell-btm <%= grp2 %>">
+              <% if trackLabel == 'B' %>
+                <span class="dy-dest">&lt;-<%= warp['dest'] %></span><a href="<%= href2 %>" class="dy-link"><%= label2 %></a>
+              <% else %>
+                <a href="<%= href2 %>" class="dy-link"><%= label2 %></a><span class="dy-dest">-&gt;<%= warp['dest'] %></span>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="dycell-top <%= grp1 %>">&nbsp;</div>
+            <div class="dycell-btm <%= grp1 %>">
+              <a href="<%= href1 %>" class="dy-link"><%= label1 %></a>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

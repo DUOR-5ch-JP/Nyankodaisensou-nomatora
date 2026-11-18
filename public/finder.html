@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>にゃん大ノマトラ</title>
+  <link rel="stylesheet" id="site-stylesheet" href="/css/style.css">
+  <link rel="icon" id="site-favicon" type="image/png" href="/gazoo/yamime.fcon.png?v=1">
+  <meta name="description" content="にゃんこ大戦争 ノーマルガチャシードトラッカー＆シードファインダー">
+  <meta property="og:title" content="にゃん大ノマトラ - NBW N.GACHA SEED TRACKER">
+  <meta property="og:description" content="PONOSはサイコロをふらない。ノーマルガチャのシード特定・軌道予測ツール。">
+  <meta property="og:type" content="website">
+
+  <script>
+    if (location.pathname.endsWith('.html') || location.protocol === 'file:') {
+      document.getElementById('site-stylesheet').href = './css/style.css';
+      document.getElementById('site-favicon').href = './gazoo/yamime.fcon.png?v=1';
+    }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <h1 class="site-title"><a href="/" data-static="./index.html">NBW N.GACHA SEEDTRACKER</a></h1>
+      <nav class="site-nav">
+        <a href="/" data-static="./index.html">トップ</a>
+        <a href="/nomatora" data-static="./nomatora.html">トラック</a>
+        <a href="/finder" data-static="./finder.html">シード検索</a>
+        <a href="/howto" data-static="./howto.html">使い方</a>
+        <a href="/credits" data-static="./credits.html">クレジット</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <style>
+  .finder-page-container { max-width: 960px; margin: 0 auto; padding: 8px 8px 180px; color: #222; text-align: left; }
+  .finder-h1 { font-size: 1.45rem; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 10px; }
+  .finder-sub, .finder-sec-title { font-size: 1.05rem; font-weight: bold; color: #111; margin: 0 0 12px; }
+  .finder-guide { display: flex; flex-direction: column; gap: 6px; margin-bottom: 22px; font-size: 0.88rem; color: #444; line-height: 1.6; }
+  .finder-guide p { margin: 0; }
+  .finder-radio-label-head, .finder-slots-caption { font-size: 0.85rem; color: #555; margin-bottom: 6px; }
+  .finder-radio-group { margin-bottom: 16px; display: flex; gap: 16px; flex-wrap: wrap; }
+  .finder-radio-item { cursor: pointer; display: inline-flex; align-items: center; gap: 5px; font-size: 0.88rem; }
+  .finder-slots-column { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 18px; }
+  .finder-slot-card {
+    display: flex; align-items: center; height: 25px; width: 195px;
+    border: 1px dashed #ccc; border-radius: 4px; background: #fafafa;
+    cursor: pointer; overflow: hidden; user-select: none; box-sizing: border-box;
+    transition: background-color 0.1s, border-color 0.1s;
+  }
+  .finder-slot-card:hover { border-color: #1976d2; background: #f0f0f0; }
+  .finder-slot-card.is-filled { border: 2px solid #1976d2; background: #e3f2fd; }
+  .finder-slot-card.is-filled:hover { background: #d0e7ff; }
+  .finder-slot-index {
+    color: #777; font-size: 0.68rem; font-weight: bold; width: 38px; height: 100%;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    border-right: 1px solid #ddd; margin-right: 6px;
+  }
+  .finder-slot-card.is-filled .finder-slot-index { background: rgba(250, 250, 250, 0.5); }
+  .finder-slot-text { font-size: 0.82rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .finder-slot-text.is-empty { color: #ccc; font-size: 0.75rem; }
+  .finder-slot-text.is-filled { font-weight: bold; color: #0d47a1; }
+  .finder-action-area { margin: 16px 0 18px; }
+  .finder-analyze-btn {
+    padding: 10px 12px; font-size: 0.92rem; font-weight: bold; color: #fff;
+    background: #ff33ff; border: none; border-radius: 6px; cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15), 0 4px 12px rgba(189,28,165,0.25);
+    width: 100%; max-width: 195px; outline: none; transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .finder-analyze-btn:hover:not(:disabled) { background: #e02ac7; transform: translateY(-1px); box-shadow: 0 4px 8px rgba(0,0,0,0.2), 0 6px 16px rgba(224,42,199,0.4); }
+  .finder-analyze-btn:disabled { cursor: not-allowed; box-shadow: none; }
+  .finder-searching-msg { padding: 8px 4px; font-weight: bold; color: #ff33ff; font-size: 0.9rem; letter-spacing: 0.05em; }
+  .finder-results-area { margin-bottom: 24px; font-size: 0.92rem; line-height: 1.6; }
+  .finder-results-area ul { margin: 6px 0 10px; padding-left: 22px; }
+  .finder-dock-bar {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(240,240,240,0.96); backdrop-filter: blur(4px);
+    border-top: 2px solid #ccc; box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
+    padding: 8px; display: flex; justify-content: center;
+  }
+  .finder-dock-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; gap: 5px; }
+  .finder-dock-header { display: flex; justify-content: space-between; align-items: center; padding: 0 2px; }
+  .finder-dock-title { color: #333; font-weight: bold; font-size: 0.72rem; }
+  .finder-clear-all-btn {
+    height: 20px; font-size: 0.68rem; padding: 0 8px; font-weight: bold;
+    color: #d32f2f; background: #fff; border: 1px solid #d32f2f; border-radius: 4px; cursor: pointer;
+  }
+  .finder-clear-all-btn:hover { background: #ffebee; }
+  .finder-key-flex { display: flex; flex-wrap: wrap; gap: 4px; }
+  .finder-unit-btn {
+    position: relative; padding: 5px 6px; font-size: 0.76rem; line-height: 1.1;
+    border: 1px solid #ccc; border-radius: 3px; min-height: 26px; cursor: pointer;
+    flex: 1 0 calc(25% - 4px); box-shadow: 0 1px 2px rgba(0,0,0,0.05); user-select: none;
+  }
+  @media (min-width: 600px) { .finder-unit-btn { flex-basis: calc(20% - 4px); } }
+  @media (min-width: 900px) { .finder-unit-btn { flex-basis: auto; } }
+  .finder-unit-btn:hover:not(:disabled) { opacity: 0.88; }
+  .finder-unit-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .finder-unit-btn.is-char { background: #fff; color: #222; }
+  .finder-unit-btn.is-skill { background: #c9e4ff; color: #111; }
+  .finder-count-badge {
+    position: absolute; top: -4px; right: -4px; background: #ef5350; color: #fff;
+    border-radius: 10px; padding: 0 5px; font-size: 0.62rem; font-weight: bold;
+    border: 1px solid #fff; line-height: 1.3; z-index: 2;
+  }
+</style>
+
+<section class="NVA-Duor">
+  <div class="finder-page-container">
+    <h1 class="finder-h1">にゃん大 ノーマルガチャシードファインダー</h1>
+    <div class="finder-sub">シード値を特定してシードトラッカーデビューしよう</div>
+
+    <div class="finder-guide">
+      <p>あなたのアカウントの現在のノーマルガチャ<strong>シード値</strong>を解析し特定できます。レアガチャのシード値特定には使えません。</p>
+      <p>シード値がわかればシートラを使って闇猫目など目当てのキャラ、アイテムを自在に狙って取れます。</p>
+      <p>シード値特定が初めての場合、<strong>最小で10件</strong>、1度で特定出来なかった場合は合計15件前後までガチャ結果を入れ替えて、解析を繰り返す必要がでてきます。</p>
+      <p>ガチャの結果またはガチャチケットはゆとりをもって<strong>15件または15枚ほど準備</strong>してシード値特定作業をはじめてください。</p>
+      <p>もし1度目で特定出来なかった場合は、選択表示済の1番をクリックして消してください。すると2番以降が繰り上がるので空いた10番に新たなガチャ結果を選択し再度解析してください。途中で間違えた場合も同様に間違えた選択枠をクリックして消して下さい。</p>
+      <p>シード値を無事特定できた方または、すでにシード値をお持ちの方は → <a id="finder-direct-link" href="/nomatora" style="font-weight: bold;">こちら</a></p>
+    </div>
+
+    <div class="finder-sec-title">初期シード値解析,特定</div>
+
+    <div class="finder-radio-label-head">ノーマル または ノーマル+ の選択</div>
+    <div class="finder-radio-group">
+      <label class="finder-radio-item"><input type="radio" name="finder_nomagacha" value="nm" checked onchange="finderSwitchGacha('nm')">Normal</label>
+      <label class="finder-radio-item"><input type="radio" name="finder_nomagacha" value="n+" onchange="finderSwitchGacha('n+')">Normal+</label>
+    </div>
+
+    <div class="finder-slots-caption">ガチャを引いた順（タップするとその枠が消えて、後ろが自動で上に詰まります）</div>
+    <div id="finder-slots-box" class="finder-slots-column"></div>
+
+    <div class="finder-action-area">
+      <button type="button" id="finder-analyze-btn" class="finder-analyze-btn" onclick="finderRunSearch()">シード値解析開始</button>
+    </div>
+
+    <div id="finder-status-box"></div>
+    <div id="finder-results-box" class="finder-results-area"></div>
+  </div>
+</section>
+
+<div class="finder-dock-bar">
+  <div class="finder-dock-inner">
+    <div class="finder-dock-header">
+      <span class="finder-dock-title">クリックで自動入力</span>
+      <button type="button" class="finder-clear-all-btn" onclick="finderClearAll()">全部クリア</button>
+    </div>
+    <div id="finder-keypad-box" class="finder-key-flex"></div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const isStatic = location.pathname.endsWith('.html') || location.protocol === 'file:';
+    const trackBase = isStatic ? './nomatora.html' : '/nomatora';
+    const directEl = document.getElementById('finder-direct-link');
+    if (directEl) directEl.href = trackBase;
+
+    let gacha = 'nm';
+    let rolls = [null, null, null, null, null, null, null, null, null, null];
+    let workers = [];
+    let prog = [];
+    let found = [];
+    let busy = false;
+
+    const meta = {
+      Nuko:     { short: 'ネコ',       full: 'ネコ',               skill: false },
+      Tank:     { short: 'タンク',     full: 'タンクネコ',         skill: false },
+      Battle:   { short: 'バトル',     full: 'バトルネコ',         skill: false },
+      Kimo:     { short: 'キモ',       full: 'キモネコ',           skill: false },
+      Usi:      { short: 'ウシ',       full: 'ウシネコ',           skill: false },
+      Tori:     { short: 'トリ',       full: 'ネコノトリ',         skill: false },
+      Fish:     { short: 'フィッシュ', full: 'ネコフィッシュ',     skill: false },
+      Tokage:   { short: 'トカゲ',     full: 'ネコトカゲ',         skill: false },
+      Kyojin:   { short: '巨神',       full: '巨神ネコ',           skill: false },
+      Cyojin:   { short: '超人',       full: 'ネコ超人',           skill: false },
+      Kougeki:  { short: '攻撃',       full: 'にゃんこ砲攻撃力',   skill: true },
+      Charge:   { short: 'チャージ',   full: 'にゃんこ砲チャージ', skill: true },
+      Kouritu:  { short: '効率',       full: '働きネコ仕事効率',   skill: true },
+      Osaihu:   { short: '財布',       full: '働きネコお財布',     skill: true },
+      Tairyoku: { short: '体力',       full: 'お城体力',           skill: true },
+      Kenkyuu:  { short: '研究',       full: '研究力',             skill: true },
+      Kaikei:   { short: '会計',       full: '会計力',             skill: true },
+      Benkyou:  { short: '勉強',       full: '勉強力',             skill: true },
+      Tousotu:  { short: '統率',       full: '統率力',             skill: true }
+    };
+
+    const base = ['Nuko', 'Tank', 'Battle', 'Kimo', 'Usi', 'Tori', 'Fish', 'Tokage', 'Kyojin'];
+    const skill = ['Kougeki', 'Charge', 'Kouritu', 'Osaihu', 'Tairyoku', 'Kenkyuu', 'Kaikei', 'Benkyou', 'Tousotu'];
+    const pools = {
+      'nm': base.concat(skill),
+      'n+': base.concat(['Cyojin'], skill)
+    };
+
+    const wip = (s) => {
+      s ^= s << 13; s >>>= 0;
+      s ^= s >>> 17;
+      s ^= s << 15; return s >>>= 0;
+    };
+
+    const simEnd = (s, n, pool) => {
+      let last = '';
+      let endS = 0;
+      const len = pool.length;
+      for (let i = 0; i <= n; i++) {
+        if (i === n) endS = s;
+        s = wip(wip(s));
+        const id = s % len;
+        const u = pool.at(id);
+        if (u === last) {
+          s = wip(s);
+          const rm = s % (len - 1);
+          last = pool.at(rm >= id ? rm + 1 : rm);
+        } else {
+          last = u;
+        }
+      }
+      return endS;
+    };
+
+    const drawSlots = () => {
+      document.getElementById('finder-slots-box').innerHTML = rolls.map((r, i) => {
+        const text = r ? meta[r].full : '未選択';
+        return `<div class="finder-slot-card${r ? ' is-filled' : ''}" onclick="finderRemoveSlot(${i})">` +
+               `<span class="finder-slot-index">${i + 1}番</span>` +
+               `<span class="finder-slot-text ${r ? 'is-filled' : 'is-empty'}">${text}</span></div>`;
+      }).join('');
+    };
+
+    const drawPad = () => {
+      const full = rolls.every(Boolean);
+      document.getElementById('finder-keypad-box').innerHTML = pools[gacha].map((u) => {
+        const item = meta[u];
+        const cnt = rolls.filter((r) => r === u).length;
+        const cls = item.skill ? 'is-skill' : 'is-char';
+        const badge = cnt > 0 ? `<span class="finder-count-badge">${cnt}</span>` : '';
+        return `<button type="button" class="finder-unit-btn ${cls}"${busy || full ? ' disabled' : ''} onclick="finderSelectUnit('${u}')">${item.short}${badge}</button>`;
+      }).join('');
+    };
+
+    const syncBtn = () => {
+      const btn = document.getElementById('finder-analyze-btn');
+      const st = document.getElementById('finder-status-box');
+      if (busy) {
+        const sum = prog.reduce((a, b) => a + b, 0);
+        const pct = Math.min(100, Math.floor(sum / (prog.length || 1)));
+        btn.disabled = true;
+        btn.style.background = `linear-gradient(to right, #ff33ff ${pct}%, #ccc ${pct}%)`;
+        btn.textContent = `解析中... ${pct}%`;
+        st.innerHTML = '<div class="finder-searching-msg">ｼｰﾄﾞ値を解析中...</div>';
+      } else {
+        btn.disabled = false;
+        btn.style.background = '#ff33ff';
+        btn.textContent = 'シード値解析開始';
+        st.innerHTML = '';
+      }
+    };
+
+    const refresh = () => { drawSlots(); drawPad(); };
+
+    window.finderSelectUnit = (u) => {
+      if (!busy && rolls.includes(null)) {
+        rolls[rolls.indexOf(null)] = u;
+        refresh();
+      }
+    };
+    window.finderRemoveSlot = (i) => {
+      if (!busy) {
+        rolls.splice(i, 1);
+        rolls.push(null);
+        refresh();
+      }
+    };
+    window.finderClearAll = () => {
+      if (!busy) {
+        rolls = [null, null, null, null, null, null, null, null, null, null];
+        refresh();
+      }
+    };
+    window.finderSwitchGacha = (g) => {
+      gacha = g;
+      finderClearAll();
+    };
+
+    window.finderRunSearch = () => {
+      const valid = rolls.filter(Boolean);
+      if (!valid.length) return;
+
+      workers.forEach((w) => w.terminate());
+      workers = [];
+      found = [];
+
+      const pool = pools[gacha];
+      const rids = valid.map((u) => pool.indexOf(u));
+      const len = pool.length;
+
+      const code = `
+        const wip = (s) => { s ^= s << 13; s >>>= 0; s ^= s >>> 17; s ^= s << 15; return s >>>= 0; };
+        const chk = (s, r, l) => {
+          let last = -1;
+          for (let i = 0; i < r.length; i++) {
+            s = wip(wip(s));
+            const id = s % l;
+            if (id === last) {
+              s = wip(s);
+              let re = s % (l - 1);
+              if (re >= id) re++;
+              if (r.at(i) !== re) return false;
+              last = re;
+            } else {
+              if (r.at(i) !== id) return false;
+              last = id;
+            }
+          }
+          return true;
+        };
+        onmessage = ({ data: d }) => {
+        const step = (d.en - d.st) / 10;
+        let pct = 0;
+        let next = d.st + step;
+        for (let s = d.st; s <= d.en; s++) {
+           if (s >= next) { postMessage({ t: 0, i: d.i, p: pct += 10 }); next += step; }
+            if (chk(s, d.r, d.l)) postMessage({ t: 1, s });
+          }
+          postMessage({ t: 0, i: d.i, p: 100 });
+        };`;
+
+      const url = URL.createObjectURL(new Blob([code], { type: 'application/javascript' }));
+      const cores = Math.min(Math.max(navigator.hardwareConcurrency || 4, 2), 8);
+      const stepSize = Math.ceil(4294967296 / cores);
+      const chunks = [];
+      for (let st = 1; st < 4294967296; st += stepSize) {
+        chunks.push([st, Math.min(st + stepSize - 1, 4294967295)]);
+      }
+
+      prog = chunks.map(() => 0);
+      busy = true;
+      document.getElementById('finder-results-box').innerHTML = '';
+      drawPad();
+      syncBtn();
+
+      chunks.forEach((pair, idx) => {
+        const w = new Worker(url);
+        w.onmessage = ({ data: ev }) => {
+          if (ev.t === 0) {
+            prog[idx] = ev.p;
+            if (prog.every((p) => p >= 100)) {
+              busy = false;
+              workers.forEach((wk) => wk.terminate());
+              workers = [];
+              URL.revokeObjectURL(url);
+              drawPad();
+              syncBtn();
+              showRes(valid);
+            } else {
+              syncBtn();
+            }
+          } else {
+            found.push(ev.s);
+          }
+        };
+        w.postMessage({ i: idx, st: pair.at(0), en: pair.at(1), r: rids, l: len });
+        workers.push(w);
+      });
+    };
+
+    const showRes = (valid) => {
+      const box = document.getElementById('finder-results-box');
+      const tot = found.length;
+      if (!tot) {
+        box.innerHTML = '<p>シード値を特定出来ません。入力内容を確認して再試行してください。</p>';
+        return;
+      }
+
+      const cntMsg = tot > 10
+        ? '条件に一致するシード値が <strong>複数</strong> 見つかりました。上位10件のみ表示しています。'
+        : `条件に一致するシード値が <strong>${tot} 件</strong> 見つかりました。`;
+
+      const list = found.slice(0, 10).map((s0, i) => {
+        const s1 = simEnd(s0, valid.length, pools[gacha]);
+        const lastCat = valid.at(valid.length - 1);
+        const url = `${trackBase}?seed=${s1}&rolls=100&nomagachas=${encodeURIComponent(gacha)}&lastCat=${encodeURIComponent(lastCat)}`;
+        return `<div style="margin-bottom:8px"><strong>シード値 ${i + 1}</strong>: <a href="${url}" style="font-weight:bold">${s1}</a></div>`;
+      }).join('');
+      box.innerHTML = `<div>【重要】初めての方はご注意下さい<ul>` +
+        `<li>シード値の候補が複数ある場合はまだ特定できていません。結果が1件に絞り込めるまで再試行してください。</li>` +
+        `<li>10件以内に同じキャラ、アイテムを複数回含むデータを元に解析すると特定が難しい場合があります。</li>` +
+        `</ul>${cntMsg}</div><div style="margin-top:12px">${list}</div>`;
+    };
+    refresh();
+  })();
+</script>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="copyright">©2026 DUOR◆NYANMA/rK7Ec</p>
+      <p class="powered-by">Powered by Gemini</p>
+    </div>
+  </footer>
+
+  <script>
+    if (location.pathname.endsWith('.html') || location.protocol === 'file:') {
+      document.querySelectorAll('a[data-static]').forEach(function(a) {
+        a.href = a.getAttribute('data-static');
+      });
+    }
+  </script>
+</body>
+</html>

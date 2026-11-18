@@ -1,0 +1,9 @@
+pages:
+  stage: deploy
+  script:
+    - echo "Deploying public folder"
+  artifacts:
+    paths:
+      - public
+  only:
+    - main

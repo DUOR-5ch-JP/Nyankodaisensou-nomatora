@@ -1,0 +1,76 @@
+<%= erb :uicustomizer, :locals => { 'six_gachas' => sixGachas, 'true_destiny_data' => trueDestinyData } %>
+
+<div class="NVA-Duor" style="text-align: left; margin-bottom: 16px;">
+  <form method="get" action="/nomatora" id="nomatora-form" class="controls-panel">
+    <div style="margin-bottom: 8px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px;">
+      <label>Current seed:
+        <input type="number" name="seed" value="<%= trueDestinyData['seed'] %>" min="1" max="4294967295" required>
+      </label>
+      <label>Rolls:
+        <select name="rolls" onchange="this.form.submit();">
+          <% [100, 200, 500, 1000].each do |r| %>
+            <option value="<%= r %>" <%= 'selected' if trueDestinyData['numRolls'] == r %>><%= r %></option>
+          <% end %>
+        </select>
+      </label>
+      <label>表示:
+        <select name="lang" onchange="this.form.submit();">
+          <option value="ja" <%= 'selected' if langMode == 'ja' %>>日本語</option>
+          <option value="short2" <%= 'selected' if langMode == 'short2' %>>短縮</option>
+          <option value="en" <%= 'selected' if langMode == 'en' %>>ローマ字</option>
+        </select>
+      </label>
+      <input type="hidden" name="lastCat" value="<%= trueDestinyData['lastCat'] %>">
+      <button type="submit">Update</button>
+    </div>
+
+    <div>
+      <span>Nomagachas: </span>
+      <input type="hidden" name="nomagachas" value="">
+      <% sixGachas.each do |gacha| %>
+        <% short = gacha['shortname'] %>
+        <% is_checked = checkedList.include?(short) %>
+        <label style="margin-right: 10px;">
+          <input type="checkbox"
+                 name="nomagachas_selected"
+                 value="<%= short %>"
+                 <%= 'checked' if is_checked %>
+                 onchange="this.form.submit();">
+          <%= gacha['name'] %>
+        </label>
+      <% end %>
+    </div>
+  </form>
+</div>
+
+<div style="text-align: left; overflow-x: auto;">
+  <%= erb :roll_destiny, :locals => {
+    'trueDestinyData' => trueDestinyData,
+    'baseParams' => baseParams,
+    'langMode' => langMode
+  } %>
+</div>
+
+<script>
+  (function() {
+    var isstatic = location.pathname.endsWith('.html') || location.protocol === 'file:';
+    var basepath = isstatic ? './nomatora.html' : '/nomatora';
+    var formel = document.getElementById('nomatora-form');
+    if (formel) formel.action = basepath;
+
+    var storagekey = 'nomatora_saved_query';
+    var currentsearch = window.location.search;
+
+    if (!currentsearch || currentsearch === '?') {
+      var savedquery = localStorage.getItem(storagekey);
+      if (savedquery && savedquery !== '?') {
+        window.location.replace(basepath + savedquery);
+      }
+    } else {
+      localStorage.setItem(storagekey, currentsearch);
+    }
+  })();
+</script>
+
+<script src="./js/nomatora-static.js"></script>
+

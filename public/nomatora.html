@@ -1,0 +1,6126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>にゃん大ノマトラ</title>
+  <link rel="stylesheet" id="site-stylesheet" href="/css/style.css">
+  <link rel="icon" id="site-favicon" type="image/png" href="/gazoo/yamime.fcon.png?v=1">
+  <meta name="description" content="にゃんこ大戦争 ノーマルガチャシードトラッカー＆シードファインダー">
+  <meta property="og:title" content="にゃん大ノマトラ - NBW N.GACHA SEED TRACKER">
+  <meta property="og:description" content="PONOSはサイコロをふらない。ノーマルガチャのシード特定・軌道予測ツール。">
+  <meta property="og:type" content="website">
+
+  <script>
+    if (location.pathname.endsWith('.html') || location.protocol === 'file:') {
+      document.getElementById('site-stylesheet').href = './css/style.css';
+      document.getElementById('site-favicon').href = './gazoo/yamime.fcon.png?v=1';
+    }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <h1 class="site-title"><a href="/" data-static="./index.html">NBW N.GACHA SEEDTRACKER</a></h1>
+      <nav class="site-nav">
+        <a href="/" data-static="./index.html">トップ</a>
+        <a href="/nomatora" data-static="./nomatora.html">トラック</a>
+        <a href="/finder" data-static="./finder.html">シード検索</a>
+        <a href="/howto" data-static="./howto.html">使い方</a>
+        <a href="/credits" data-static="./credits.html">クレジット</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content">
+    
+<style id="uicustom-wallpaper-style">
+  body {
+    background-image: url('./gazoo/kabegami/rakures2.3.png');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+</style>
+
+
+<div class="NVA-Duor" style="text-align: left; margin-bottom: 16px;">
+  <form method="get" action="/nomatora" id="nomatora-form" class="controls-panel">
+    <div style="margin-bottom: 8px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px;">
+      <label>Current seed:
+        <input type="number" name="seed" value="1" min="1" max="4294967295" required>
+      </label>
+      <label>Rolls:
+        <select name="rolls" onchange="this.form.submit();">
+          
+            <option value="100" selected>100</option>
+          
+            <option value="200" >200</option>
+          
+            <option value="500" >500</option>
+          
+            <option value="1000" >1000</option>
+          
+        </select>
+      </label>
+      <label>表示:
+        <select name="lang" onchange="this.form.submit();">
+          <option value="ja" selected>日本語</option>
+          <option value="short2" >短縮</option>
+          <option value="en" >ローマ字</option>
+        </select>
+      </label>
+      <input type="hidden" name="lastCat" value="">
+      <button type="submit">Update</button>
+    </div>
+
+    <div>
+      <span>Nomagachas: </span>
+      <input type="hidden" name="nomagachas" value="">
+      
+        
+        
+        <label style="margin-right: 10px;">
+          <input type="checkbox"
+                 name="nomagachas_selected"
+                 value="n+"
+                 
+                 onchange="this.form.submit();">
+          Normal+
+        </label>
+      
+        
+        
+        <label style="margin-right: 10px;">
+          <input type="checkbox"
+                 name="nomagachas_selected"
+                 value="fu"
+                 
+                 onchange="this.form.submit();">
+          Fukubiki
+        </label>
+      
+        
+        
+        <label style="margin-right: 10px;">
+          <input type="checkbox"
+                 name="nomagachas_selected"
+                 value="fg"
+                 
+                 onchange="this.form.submit();">
+          FukubikiG
+        </label>
+      
+        
+        
+        <label style="margin-right: 10px;">
+          <input type="checkbox"
+                 name="nomagachas_selected"
+                 value="ne"
+                 checked
+                 onchange="this.form.submit();">
+          Nekome
+        </label>
+      
+        
+        
+        <label style="margin-right: 10px;">
+          <input type="checkbox"
+                 name="nomagachas_selected"
+                 value="ma"
+                 
+                 onchange="this.form.submit();">
+          Matatabi
+        </label>
+      
+        
+        
+        <label style="margin-right: 10px;">
+          <input type="checkbox"
+                 name="nomagachas_selected"
+                 value="nm"
+                 checked
+                 onchange="this.form.submit();">
+          Normal
+        </label>
+      
+    </div>
+  </form>
+</div>
+
+<div style="text-align: left; overflow-x: auto;">
+  <div class="ally-gem mode-ja">
+  <div class="org-gem">
+    
+<div class="dy-maint">
+  <div class="dy-row">
+    <div class="dy-head dy-num-col dynum-top">A</div>
+    
+      <div class="dy-head dy-data-col dynum-top">猫目</div>
+    
+      <div class="dy-head dy-data-col dynum-top">ﾉｰﾏﾙ</div>
+    
+  </div>
+
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">1</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1158709409&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1158709409&rolls=100&nomagachas=nm%2Cne&lastCat=Kaikei&lang=ja" class="dy-link">会計</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">2</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=672445067&rolls=100&nomagachas=nm%2Cne&lastCat=CyoMe&lang=ja" class="dy-link">【超】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=672445067&rolls=100&nomagachas=nm%2Cne&lastCat=Tairyoku&lang=ja" class="dy-link">体力</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">3</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1505329467&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1505329467&rolls=100&nomagachas=nm%2Cne&lastCat=Kaikei&lang=ja" class="dy-link">会計</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">4</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2505480473&rolls=100&nomagachas=nm%2Cne&lastCat=CyoMe&lang=ja" class="dy-link">【超】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=2505480473&rolls=100&nomagachas=nm%2Cne&lastCat=Kyojin&lang=ja" class="dy-link">巨神</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">5</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=926547507&rolls=100&nomagachas=nm%2Cne&lastCat=5K&lang=ja" class="dy-link">0.5万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=926547507&rolls=100&nomagachas=nm%2Cne&lastCat=Kaikei&lang=ja" class="dy-link">会計</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">6</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3323093252&rolls=100&nomagachas=nm%2Cne&lastCat=100K&lang=ja" class="dy-link">10万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3323093252&rolls=100&nomagachas=nm%2Cne&lastCat=Kenkyuu&lang=ja" class="dy-link">研究</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">7</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2308876866&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=2308876866&rolls=100&nomagachas=nm%2Cne&lastCat=Tousotu&lang=ja" class="dy-link">統率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">8</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">
+              <a href="?seed=3653394186&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+            <div class="dycell-btm grp-z">
+              
+                <a href="?seed=959370779&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a><span class="dy-dest">-&gt;9B</span>
+              
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3653394186&rolls=100&nomagachas=nm%2Cne&lastCat=Tori&lang=ja" class="dy-link">ﾄﾘ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">9</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1787885&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1787885&rolls=100&nomagachas=nm%2Cne&lastCat=Kouritu&lang=ja" class="dy-link">効率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">10</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1011060275&rolls=100&nomagachas=nm%2Cne&lastCat=100K&lang=ja" class="dy-link">10万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1011060275&rolls=100&nomagachas=nm%2Cne&lastCat=Osaihu&lang=ja" class="dy-link">財布</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">11</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3030608000&rolls=100&nomagachas=nm%2Cne&lastCat=5K&lang=ja" class="dy-link">0.5万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3030608000&rolls=100&nomagachas=nm%2Cne&lastCat=Kimo&lang=ja" class="dy-link">ｷﾓ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">12</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3556602323&rolls=100&nomagachas=nm%2Cne&lastCat=GekiMe&lang=ja" class="dy-link">【激】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">
+              <a href="?seed=3556602323&rolls=100&nomagachas=nm%2Cne&lastCat=Kimo&lang=ja" class="dy-link">ｷﾓ</a>
+            </div>
+            <div class="dycell-btm grp-n">
+              
+                <a href="?seed=3932106544&rolls=100&nomagachas=nm%2Cne&lastCat=Tokage&lang=ja" class="dy-link">ﾄｶｹﾞ</a><span class="dy-dest">-&gt;13B</span>
+              
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">13</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2614044908&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=2614044908&rolls=100&nomagachas=nm%2Cne&lastCat=Charge&lang=ja" class="dy-link">ﾁｬｰｼﾞ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">14</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1641688181&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1641688181&rolls=100&nomagachas=nm%2Cne&lastCat=Kimo&lang=ja" class="dy-link">ｷﾓ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">15</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1974696455&rolls=100&nomagachas=nm%2Cne&lastCat=GekiMe&lang=ja" class="dy-link">【激】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1974696455&rolls=100&nomagachas=nm%2Cne&lastCat=Tairyoku&lang=ja" class="dy-link">体力</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">16</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=4176803503&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=4176803503&rolls=100&nomagachas=nm%2Cne&lastCat=Usi&lang=ja" class="dy-link">ｳｼ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">17</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2323961243&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=2323961243&rolls=100&nomagachas=nm%2Cne&lastCat=Kouritu&lang=ja" class="dy-link">効率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">18</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3923124515&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3923124515&rolls=100&nomagachas=nm%2Cne&lastCat=Battle&lang=ja" class="dy-link">ﾊﾞﾄﾙ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">19</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3694158248&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3694158248&rolls=100&nomagachas=nm%2Cne&lastCat=Fish&lang=ja" class="dy-link">ﾌｨｯｼｭ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">20</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3830014808&rolls=100&nomagachas=nm%2Cne&lastCat=100K&lang=ja" class="dy-link">10万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3830014808&rolls=100&nomagachas=nm%2Cne&lastCat=Nuko&lang=ja" class="dy-link">ﾈｺ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">21</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3457198846&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3457198846&rolls=100&nomagachas=nm%2Cne&lastCat=Tousotu&lang=ja" class="dy-link">統率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">22</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1906717533&rolls=100&nomagachas=nm%2Cne&lastCat=GekiMe&lang=ja" class="dy-link">【激】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1906717533&rolls=100&nomagachas=nm%2Cne&lastCat=Kouritu&lang=ja" class="dy-link">効率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">23</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3631941112&rolls=100&nomagachas=nm%2Cne&lastCat=GekiMe&lang=ja" class="dy-link">【激】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3631941112&rolls=100&nomagachas=nm%2Cne&lastCat=Kougeki&lang=ja" class="dy-link">攻撃</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">24</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2621031943&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=2621031943&rolls=100&nomagachas=nm%2Cne&lastCat=Charge&lang=ja" class="dy-link">ﾁｬｰｼﾞ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">25</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1784992862&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1784992862&rolls=100&nomagachas=nm%2Cne&lastCat=Tousotu&lang=ja" class="dy-link">統率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">26</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1404424598&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1404424598&rolls=100&nomagachas=nm%2Cne&lastCat=Tairyoku&lang=ja" class="dy-link">体力</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">27</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">
+              <a href="?seed=2093758102&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+            <div class="dycell-btm grp-z">
+              
+                <a href="?seed=3218213785&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a><span class="dy-dest">-&gt;28B</span>
+              
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=2093758102&rolls=100&nomagachas=nm%2Cne&lastCat=Kimo&lang=ja" class="dy-link">ｷﾓ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">28</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1422251209&rolls=100&nomagachas=nm%2Cne&lastCat=GekiMe&lang=ja" class="dy-link">【激】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1422251209&rolls=100&nomagachas=nm%2Cne&lastCat=Tairyoku&lang=ja" class="dy-link">体力</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">29</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2916402190&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=2916402190&rolls=100&nomagachas=nm%2Cne&lastCat=Tori&lang=ja" class="dy-link">ﾄﾘ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">30</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2163552845&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=2163552845&rolls=100&nomagachas=nm%2Cne&lastCat=Fish&lang=ja" class="dy-link">ﾌｨｯｼｭ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">31</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1192952344&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1192952344&rolls=100&nomagachas=nm%2Cne&lastCat=Tank&lang=ja" class="dy-link">ﾀﾝｸ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">32</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1040426862&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1040426862&rolls=100&nomagachas=nm%2Cne&lastCat=Kyojin&lang=ja" class="dy-link">巨神</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">33</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3460660169&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3460660169&rolls=100&nomagachas=nm%2Cne&lastCat=Kaikei&lang=ja" class="dy-link">会計</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">34</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=103407529&rolls=100&nomagachas=nm%2Cne&lastCat=5K&lang=ja" class="dy-link">0.5万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=103407529&rolls=100&nomagachas=nm%2Cne&lastCat=Tousotu&lang=ja" class="dy-link">統率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">35</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1235341804&rolls=100&nomagachas=nm%2Cne&lastCat=GekiMe&lang=ja" class="dy-link">【激】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1235341804&rolls=100&nomagachas=nm%2Cne&lastCat=Kimo&lang=ja" class="dy-link">ｷﾓ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">36</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1144675686&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1144675686&rolls=100&nomagachas=nm%2Cne&lastCat=Kenkyuu&lang=ja" class="dy-link">研究</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">37</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2359695975&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=2359695975&rolls=100&nomagachas=nm%2Cne&lastCat=Tairyoku&lang=ja" class="dy-link">体力</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">38</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2197598426&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=2197598426&rolls=100&nomagachas=nm%2Cne&lastCat=Osaihu&lang=ja" class="dy-link">財布</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">39</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2315983322&rolls=100&nomagachas=nm%2Cne&lastCat=GekiMe&lang=ja" class="dy-link">【激】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=2315983322&rolls=100&nomagachas=nm%2Cne&lastCat=Tank&lang=ja" class="dy-link">ﾀﾝｸ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">40</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1511391326&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1511391326&rolls=100&nomagachas=nm%2Cne&lastCat=Usi&lang=ja" class="dy-link">ｳｼ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">41</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=284195807&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=284195807&rolls=100&nomagachas=nm%2Cne&lastCat=Kenkyuu&lang=ja" class="dy-link">研究</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">42</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3972650904&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">
+              <a href="?seed=3972650904&rolls=100&nomagachas=nm%2Cne&lastCat=Kenkyuu&lang=ja" class="dy-link">研究</a>
+            </div>
+            <div class="dycell-btm grp-n">
+              
+                <a href="?seed=2289581189&rolls=100&nomagachas=nm%2Cne&lastCat=Tori&lang=ja" class="dy-link">ﾄﾘ</a><span class="dy-dest">-&gt;43B</span>
+              
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">43</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3796917105&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3796917105&rolls=100&nomagachas=nm%2Cne&lastCat=Tousotu&lang=ja" class="dy-link">統率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">44</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2601429108&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=2601429108&rolls=100&nomagachas=nm%2Cne&lastCat=Kyojin&lang=ja" class="dy-link">巨神</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">45</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1308330846&rolls=100&nomagachas=nm%2Cne&lastCat=100K&lang=ja" class="dy-link">10万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1308330846&rolls=100&nomagachas=nm%2Cne&lastCat=Osaihu&lang=ja" class="dy-link">財布</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">46</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2837228362&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=2837228362&rolls=100&nomagachas=nm%2Cne&lastCat=Fish&lang=ja" class="dy-link">ﾌｨｯｼｭ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">47</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2630043969&rolls=100&nomagachas=nm%2Cne&lastCat=100K&lang=ja" class="dy-link">10万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=2630043969&rolls=100&nomagachas=nm%2Cne&lastCat=Benkyou&lang=ja" class="dy-link">勉強</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">48</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2148285591&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=2148285591&rolls=100&nomagachas=nm%2Cne&lastCat=Osaihu&lang=ja" class="dy-link">財布</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">49</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">
+              <a href="?seed=3498297012&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+            <div class="dycell-btm grp-z">
+              
+                <a href="?seed=555356830&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a><span class="dy-dest">-&gt;50B</span>
+              
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">
+              <a href="?seed=3498297012&rolls=100&nomagachas=nm%2Cne&lastCat=Osaihu&lang=ja" class="dy-link">財布</a>
+            </div>
+            <div class="dycell-btm grp-n">
+              
+                <a href="?seed=555356830&rolls=100&nomagachas=nm%2Cne&lastCat=Kimo&lang=ja" class="dy-link">ｷﾓ</a><span class="dy-dest">-&gt;50B</span>
+              
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">50</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2463425338&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=2463425338&rolls=100&nomagachas=nm%2Cne&lastCat=Usi&lang=ja" class="dy-link">ｳｼ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">51</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2621180004&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=2621180004&rolls=100&nomagachas=nm%2Cne&lastCat=Tori&lang=ja" class="dy-link">ﾄﾘ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">52</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=776683956&rolls=100&nomagachas=nm%2Cne&lastCat=5K&lang=ja" class="dy-link">0.5万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=776683956&rolls=100&nomagachas=nm%2Cne&lastCat=Fish&lang=ja" class="dy-link">ﾌｨｯｼｭ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">53</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1358362430&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">
+              <a href="?seed=1358362430&rolls=100&nomagachas=nm%2Cne&lastCat=Fish&lang=ja" class="dy-link">ﾌｨｯｼｭ</a>
+            </div>
+            <div class="dycell-btm grp-n">
+              
+                <a href="?seed=906653750&rolls=100&nomagachas=nm%2Cne&lastCat=Tokage&lang=ja" class="dy-link">ﾄｶｹﾞ</a><span class="dy-dest">-&gt;54B</span>
+              
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">54</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">
+              <a href="?seed=1041534000&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+            <div class="dycell-btm grp-z">
+              
+                <a href="?seed=3262012409&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a><span class="dy-dest">-&gt;55B</span>
+              
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1041534000&rolls=100&nomagachas=nm%2Cne&lastCat=Kenkyuu&lang=ja" class="dy-link">研究</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">55</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3064594289&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3064594289&rolls=100&nomagachas=nm%2Cne&lastCat=Kouritu&lang=ja" class="dy-link">効率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">56</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3754463288&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3754463288&rolls=100&nomagachas=nm%2Cne&lastCat=Charge&lang=ja" class="dy-link">ﾁｬｰｼﾞ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">57</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=4245326562&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=4245326562&rolls=100&nomagachas=nm%2Cne&lastCat=Kaikei&lang=ja" class="dy-link">会計</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">58</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=396717084&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=396717084&rolls=100&nomagachas=nm%2Cne&lastCat=Tokage&lang=ja" class="dy-link">ﾄｶｹﾞ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">59</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2636591951&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">
+              <a href="?seed=2636591951&rolls=100&nomagachas=nm%2Cne&lastCat=Tokage&lang=ja" class="dy-link">ﾄｶｹﾞ</a>
+            </div>
+            <div class="dycell-btm grp-n">
+              
+                <a href="?seed=205188840&rolls=100&nomagachas=nm%2Cne&lastCat=Kimo&lang=ja" class="dy-link">ｷﾓ</a><span class="dy-dest">-&gt;60B</span>
+              
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">60</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3001697819&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3001697819&rolls=100&nomagachas=nm%2Cne&lastCat=Nuko&lang=ja" class="dy-link">ﾈｺ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">61</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=846953832&rolls=100&nomagachas=nm%2Cne&lastCat=GekiMe&lang=ja" class="dy-link">【激】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=846953832&rolls=100&nomagachas=nm%2Cne&lastCat=Kougeki&lang=ja" class="dy-link">攻撃</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">62</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1950348464&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1950348464&rolls=100&nomagachas=nm%2Cne&lastCat=Tank&lang=ja" class="dy-link">ﾀﾝｸ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">63</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3045893079&rolls=100&nomagachas=nm%2Cne&lastCat=100K&lang=ja" class="dy-link">10万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3045893079&rolls=100&nomagachas=nm%2Cne&lastCat=Kyojin&lang=ja" class="dy-link">巨神</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">64</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3943879214&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3943879214&rolls=100&nomagachas=nm%2Cne&lastCat=Osaihu&lang=ja" class="dy-link">財布</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">65</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=861322279&rolls=100&nomagachas=nm%2Cne&lastCat=GekiMe&lang=ja" class="dy-link">【激】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=861322279&rolls=100&nomagachas=nm%2Cne&lastCat=Tank&lang=ja" class="dy-link">ﾀﾝｸ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">66</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=882165072&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=882165072&rolls=100&nomagachas=nm%2Cne&lastCat=Fish&lang=ja" class="dy-link">ﾌｨｯｼｭ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">67</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2410352823&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=2410352823&rolls=100&nomagachas=nm%2Cne&lastCat=Kaikei&lang=ja" class="dy-link">会計</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">68</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=518103371&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=518103371&rolls=100&nomagachas=nm%2Cne&lastCat=Kougeki&lang=ja" class="dy-link">攻撃</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">69</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3671843074&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3671843074&rolls=100&nomagachas=nm%2Cne&lastCat=Tank&lang=ja" class="dy-link">ﾀﾝｸ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">70</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">
+              <a href="?seed=752286394&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+            <div class="dycell-btm grp-z">
+              
+                <a href="?seed=305972090&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a><span class="dy-dest">-&gt;71B</span>
+              
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=752286394&rolls=100&nomagachas=nm%2Cne&lastCat=Tokage&lang=ja" class="dy-link">ﾄｶｹﾞ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">71</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1769621075&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1769621075&rolls=100&nomagachas=nm%2Cne&lastCat=Kyojin&lang=ja" class="dy-link">巨神</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">72</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3295154329&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3295154329&rolls=100&nomagachas=nm%2Cne&lastCat=Kimo&lang=ja" class="dy-link">ｷﾓ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">73</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3178819914&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3178819914&rolls=100&nomagachas=nm%2Cne&lastCat=Kyojin&lang=ja" class="dy-link">巨神</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">74</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-d">&nbsp;</div>
+            <div class="dycell-btm grp-d">
+              <a href="?seed=209880956&rolls=100&nomagachas=nm%2Cne&lastCat=GemiMe&lang=ja" class="dy-link">【闇】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=209880956&rolls=100&nomagachas=nm%2Cne&lastCat=Benkyou&lang=ja" class="dy-link">勉強</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">75</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1245450170&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1245450170&rolls=100&nomagachas=nm%2Cne&lastCat=Battle&lang=ja" class="dy-link">ﾊﾞﾄﾙ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">76</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1550528392&rolls=100&nomagachas=nm%2Cne&lastCat=5K&lang=ja" class="dy-link">0.5万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1550528392&rolls=100&nomagachas=nm%2Cne&lastCat=Tousotu&lang=ja" class="dy-link">統率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">77</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=845580397&rolls=100&nomagachas=nm%2Cne&lastCat=GekiMe&lang=ja" class="dy-link">【激】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=845580397&rolls=100&nomagachas=nm%2Cne&lastCat=Kimo&lang=ja" class="dy-link">ｷﾓ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">78</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2709457798&rolls=100&nomagachas=nm%2Cne&lastCat=5K&lang=ja" class="dy-link">0.5万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=2709457798&rolls=100&nomagachas=nm%2Cne&lastCat=Osaihu&lang=ja" class="dy-link">財布</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">79</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3947915230&rolls=100&nomagachas=nm%2Cne&lastCat=GekiMe&lang=ja" class="dy-link">【激】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3947915230&rolls=100&nomagachas=nm%2Cne&lastCat=Kougeki&lang=ja" class="dy-link">攻撃</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">80</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1826707356&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1826707356&rolls=100&nomagachas=nm%2Cne&lastCat=Kimo&lang=ja" class="dy-link">ｷﾓ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">81</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1412615664&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1412615664&rolls=100&nomagachas=nm%2Cne&lastCat=Kouritu&lang=ja" class="dy-link">効率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">82</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=817251214&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=817251214&rolls=100&nomagachas=nm%2Cne&lastCat=Fish&lang=ja" class="dy-link">ﾌｨｯｼｭ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">83</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1292454795&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1292454795&rolls=100&nomagachas=nm%2Cne&lastCat=Kaikei&lang=ja" class="dy-link">会計</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">84</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2712401021&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">
+              <a href="?seed=2712401021&rolls=100&nomagachas=nm%2Cne&lastCat=Kaikei&lang=ja" class="dy-link">会計</a>
+            </div>
+            <div class="dycell-btm grp-n">
+              
+                <a href="?seed=3268656111&rolls=100&nomagachas=nm%2Cne&lastCat=Usi&lang=ja" class="dy-link">ｳｼ</a><span class="dy-dest">-&gt;85B</span>
+              
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">85</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">
+              <a href="?seed=3039953208&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+            <div class="dycell-btm grp-z">
+              
+                <a href="?seed=1221360562&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a><span class="dy-dest">-&gt;86B</span>
+              
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3039953208&rolls=100&nomagachas=nm%2Cne&lastCat=Kimo&lang=ja" class="dy-link">ｷﾓ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">86</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3951941743&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3951941743&rolls=100&nomagachas=nm%2Cne&lastCat=Charge&lang=ja" class="dy-link">ﾁｬｰｼﾞ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">87</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3089180006&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3089180006&rolls=100&nomagachas=nm%2Cne&lastCat=Tairyoku&lang=ja" class="dy-link">体力</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">88</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=385340700&rolls=100&nomagachas=nm%2Cne&lastCat=5K&lang=ja" class="dy-link">0.5万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=385340700&rolls=100&nomagachas=nm%2Cne&lastCat=Battle&lang=ja" class="dy-link">ﾊﾞﾄﾙ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">89</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3998805986&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3998805986&rolls=100&nomagachas=nm%2Cne&lastCat=Fish&lang=ja" class="dy-link">ﾌｨｯｼｭ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">90</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1778145037&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1778145037&rolls=100&nomagachas=nm%2Cne&lastCat=Kenkyuu&lang=ja" class="dy-link">研究</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">91</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3152983749&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3152983749&rolls=100&nomagachas=nm%2Cne&lastCat=Kimo&lang=ja" class="dy-link">ｷﾓ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">92</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1064914135&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1064914135&rolls=100&nomagachas=nm%2Cne&lastCat=Nuko&lang=ja" class="dy-link">ﾈｺ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">93</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">
+              <a href="?seed=3597012804&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+            <div class="dycell-btm grp-z">
+              
+                <a href="?seed=1439630467&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a><span class="dy-dest">-&gt;94B</span>
+              
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3597012804&rolls=100&nomagachas=nm%2Cne&lastCat=Kyojin&lang=ja" class="dy-link">巨神</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">94</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=709443116&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=709443116&rolls=100&nomagachas=nm%2Cne&lastCat=Tokage&lang=ja" class="dy-link">ﾄｶｹﾞ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">95</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=53005208&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=53005208&rolls=100&nomagachas=nm%2Cne&lastCat=Usi&lang=ja" class="dy-link">ｳｼ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">96</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=385388126&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=385388126&rolls=100&nomagachas=nm%2Cne&lastCat=Kaikei&lang=ja" class="dy-link">会計</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">97</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2157048307&rolls=100&nomagachas=nm%2Cne&lastCat=GekiMe&lang=ja" class="dy-link">【激】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=2157048307&rolls=100&nomagachas=nm%2Cne&lastCat=Tousotu&lang=ja" class="dy-link">統率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">98</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2138128048&rolls=100&nomagachas=nm%2Cne&lastCat=100K&lang=ja" class="dy-link">10万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=2138128048&rolls=100&nomagachas=nm%2Cne&lastCat=Usi&lang=ja" class="dy-link">ｳｼ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">99</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2048520998&rolls=100&nomagachas=nm%2Cne&lastCat=GekiMe&lang=ja" class="dy-link">【激】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=2048520998&rolls=100&nomagachas=nm%2Cne&lastCat=Tokage&lang=ja" class="dy-link">ﾄｶｹﾞ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">100</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3723159153&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3723159153&rolls=100&nomagachas=nm%2Cne&lastCat=Osaihu&lang=ja" class="dy-link">財布</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+</div>
+
+
+    
+<div class="dy-maint">
+  <div class="dy-row">
+    <div class="dy-head dy-num-col dynum-top">B</div>
+    
+      <div class="dy-head dy-data-col dynum-top">猫目</div>
+    
+      <div class="dy-head dy-data-col dynum-top">ﾉｰﾏﾙ</div>
+    
+  </div>
+
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">1</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=269814307&rolls=100&nomagachas=nm%2Cne&lastCat=GekiMe&lang=ja" class="dy-link">【激】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=269814307&rolls=100&nomagachas=nm%2Cne&lastCat=Tousotu&lang=ja" class="dy-link">統率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">2</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2022772137&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=2022772137&rolls=100&nomagachas=nm%2Cne&lastCat=Tori&lang=ja" class="dy-link">ﾄﾘ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">3</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">
+              <a href="?seed=56940020&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+            <div class="dycell-btm grp-z">
+              
+                <span class="dy-dest">&lt;-5A</span><a href="?seed=2505480473&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+              
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=56940020&rolls=100&nomagachas=nm%2Cne&lastCat=Kaikei&lang=ja" class="dy-link">会計</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">4</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2338593315&rolls=100&nomagachas=nm%2Cne&lastCat=5K&lang=ja" class="dy-link">0.5万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=2338593315&rolls=100&nomagachas=nm%2Cne&lastCat=Kouritu&lang=ja" class="dy-link">効率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">5</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3319372364&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3319372364&rolls=100&nomagachas=nm%2Cne&lastCat=Kougeki&lang=ja" class="dy-link">攻撃</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">6</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3627820061&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3627820061&rolls=100&nomagachas=nm%2Cne&lastCat=Kenkyuu&lang=ja" class="dy-link">研究</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">7</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1052918825&rolls=100&nomagachas=nm%2Cne&lastCat=5K&lang=ja" class="dy-link">0.5万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1052918825&rolls=100&nomagachas=nm%2Cne&lastCat=Nuko&lang=ja" class="dy-link">ﾈｺ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">8</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=959370779&rolls=100&nomagachas=nm%2Cne&lastCat=100K&lang=ja" class="dy-link">10万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=959370779&rolls=100&nomagachas=nm%2Cne&lastCat=Osaihu&lang=ja" class="dy-link">財布</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">9</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=19518366&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=19518366&rolls=100&nomagachas=nm%2Cne&lastCat=Tousotu&lang=ja" class="dy-link">統率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">10</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2851948785&rolls=100&nomagachas=nm%2Cne&lastCat=GekiMe&lang=ja" class="dy-link">【激】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=2851948785&rolls=100&nomagachas=nm%2Cne&lastCat=Tori&lang=ja" class="dy-link">ﾄﾘ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">11</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1537180761&rolls=100&nomagachas=nm%2Cne&lastCat=100K&lang=ja" class="dy-link">10万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1537180761&rolls=100&nomagachas=nm%2Cne&lastCat=Battle&lang=ja" class="dy-link">ﾊﾞﾄﾙ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">12</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3932106544&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3932106544&rolls=100&nomagachas=nm%2Cne&lastCat=Tousotu&lang=ja" class="dy-link">統率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">13</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=890247045&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=890247045&rolls=100&nomagachas=nm%2Cne&lastCat=Battle&lang=ja" class="dy-link">ﾊﾞﾄﾙ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">14</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1803230815&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1803230815&rolls=100&nomagachas=nm%2Cne&lastCat=Tousotu&lang=ja" class="dy-link">統率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">15</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3511457662&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3511457662&rolls=100&nomagachas=nm%2Cne&lastCat=Kouritu&lang=ja" class="dy-link">効率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">16</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=4110329279&rolls=100&nomagachas=nm%2Cne&lastCat=GekiMe&lang=ja" class="dy-link">【激】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=4110329279&rolls=100&nomagachas=nm%2Cne&lastCat=Tank&lang=ja" class="dy-link">ﾀﾝｸ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">17</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3472342400&rolls=100&nomagachas=nm%2Cne&lastCat=GekiMe&lang=ja" class="dy-link">【激】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3472342400&rolls=100&nomagachas=nm%2Cne&lastCat=Tousotu&lang=ja" class="dy-link">統率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">18</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=102717402&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">
+              <a href="?seed=102717402&rolls=100&nomagachas=nm%2Cne&lastCat=Tousotu&lang=ja" class="dy-link">統率</a>
+            </div>
+            <div class="dycell-btm grp-n">
+              
+                <span class="dy-dest">&lt;-20A</span><a href="?seed=3694158248&rolls=100&nomagachas=nm%2Cne&lastCat=Battle&lang=ja" class="dy-link">ﾊﾞﾄﾙ</a>
+              
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">19</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1422920106&rolls=100&nomagachas=nm%2Cne&lastCat=100K&lang=ja" class="dy-link">10万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1422920106&rolls=100&nomagachas=nm%2Cne&lastCat=Kenkyuu&lang=ja" class="dy-link">研究</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">20</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3414591305&rolls=100&nomagachas=nm%2Cne&lastCat=5K&lang=ja" class="dy-link">0.5万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3414591305&rolls=100&nomagachas=nm%2Cne&lastCat=Kyojin&lang=ja" class="dy-link">巨神</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">21</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1491306329&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1491306329&rolls=100&nomagachas=nm%2Cne&lastCat=Charge&lang=ja" class="dy-link">ﾁｬｰｼﾞ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">22</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1401964731&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1401964731&rolls=100&nomagachas=nm%2Cne&lastCat=Kaikei&lang=ja" class="dy-link">会計</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">23</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2483640730&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=2483640730&rolls=100&nomagachas=nm%2Cne&lastCat=Usi&lang=ja" class="dy-link">ｳｼ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">24</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=516224123&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=516224123&rolls=100&nomagachas=nm%2Cne&lastCat=Tairyoku&lang=ja" class="dy-link">体力</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">25</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1190915113&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1190915113&rolls=100&nomagachas=nm%2Cne&lastCat=Battle&lang=ja" class="dy-link">ﾊﾞﾄﾙ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">26</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">
+              <a href="?seed=1529734485&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+            <div class="dycell-btm grp-z">
+              
+                <span class="dy-dest">&lt;-28A</span><a href="?seed=2093758102&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+              
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1529734485&rolls=100&nomagachas=nm%2Cne&lastCat=Kenkyuu&lang=ja" class="dy-link">研究</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">27</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">
+              <a href="?seed=3218213785&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+            <div class="dycell-btm grp-z">
+              
+                <span class="dy-dest">&lt;-29A</span><a href="?seed=1422251209&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+              
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3218213785&rolls=100&nomagachas=nm%2Cne&lastCat=Charge&lang=ja" class="dy-link">ﾁｬｰｼﾞ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">28</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2947482599&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=2947482599&rolls=100&nomagachas=nm%2Cne&lastCat=Tank&lang=ja" class="dy-link">ﾀﾝｸ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">29</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3121028772&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3121028772&rolls=100&nomagachas=nm%2Cne&lastCat=Benkyou&lang=ja" class="dy-link">勉強</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">30</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1714749715&rolls=100&nomagachas=nm%2Cne&lastCat=GekiMe&lang=ja" class="dy-link">【激】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1714749715&rolls=100&nomagachas=nm%2Cne&lastCat=Tori&lang=ja" class="dy-link">ﾄﾘ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">31</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=797053364&rolls=100&nomagachas=nm%2Cne&lastCat=CyoMe&lang=ja" class="dy-link">【超】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=797053364&rolls=100&nomagachas=nm%2Cne&lastCat=Usi&lang=ja" class="dy-link">ｳｼ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">32</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1810022937&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1810022937&rolls=100&nomagachas=nm%2Cne&lastCat=Fish&lang=ja" class="dy-link">ﾌｨｯｼｭ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">33</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1419242327&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1419242327&rolls=100&nomagachas=nm%2Cne&lastCat=Tori&lang=ja" class="dy-link">ﾄﾘ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">34</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">
+              <a href="?seed=1300193607&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+            <div class="dycell-btm grp-z">
+              
+                <span class="dy-dest">&lt;-36A</span><a href="?seed=1235341804&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+              
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1300193607&rolls=100&nomagachas=nm%2Cne&lastCat=Tairyoku&lang=ja" class="dy-link">体力</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">35</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1200449570&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1200449570&rolls=100&nomagachas=nm%2Cne&lastCat=Usi&lang=ja" class="dy-link">ｳｼ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">36</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1119885997&rolls=100&nomagachas=nm%2Cne&lastCat=CyoMe&lang=ja" class="dy-link">【超】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1119885997&rolls=100&nomagachas=nm%2Cne&lastCat=Osaihu&lang=ja" class="dy-link">財布</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">37</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=555998610&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=555998610&rolls=100&nomagachas=nm%2Cne&lastCat=Kaikei&lang=ja" class="dy-link">会計</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">38</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3920853673&rolls=100&nomagachas=nm%2Cne&lastCat=100K&lang=ja" class="dy-link">10万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3920853673&rolls=100&nomagachas=nm%2Cne&lastCat=Kyojin&lang=ja" class="dy-link">巨神</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">39</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=4287704386&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=4287704386&rolls=100&nomagachas=nm%2Cne&lastCat=Battle&lang=ja" class="dy-link">ﾊﾞﾄﾙ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">40</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">
+              <a href="?seed=1555402064&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+            <div class="dycell-btm grp-z">
+              
+                <span class="dy-dest">&lt;-42A</span><a href="?seed=284195807&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+              
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1555402064&rolls=100&nomagachas=nm%2Cne&lastCat=Kenkyuu&lang=ja" class="dy-link">研究</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">41</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3582366746&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3582366746&rolls=100&nomagachas=nm%2Cne&lastCat=Tousotu&lang=ja" class="dy-link">統率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">42</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2289581189&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=2289581189&rolls=100&nomagachas=nm%2Cne&lastCat=Nuko&lang=ja" class="dy-link">ﾈｺ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">43</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=4006154222&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=4006154222&rolls=100&nomagachas=nm%2Cne&lastCat=Kimo&lang=ja" class="dy-link">ｷﾓ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">44</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1236930420&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1236930420&rolls=100&nomagachas=nm%2Cne&lastCat=Fish&lang=ja" class="dy-link">ﾌｨｯｼｭ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">45</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=370890006&rolls=100&nomagachas=nm%2Cne&lastCat=5K&lang=ja" class="dy-link">0.5万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=370890006&rolls=100&nomagachas=nm%2Cne&lastCat=Nuko&lang=ja" class="dy-link">ﾈｺ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">46</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3335386480&rolls=100&nomagachas=nm%2Cne&lastCat=5K&lang=ja" class="dy-link">0.5万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3335386480&rolls=100&nomagachas=nm%2Cne&lastCat=Benkyou&lang=ja" class="dy-link">勉強</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">47</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2083591092&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=2083591092&rolls=100&nomagachas=nm%2Cne&lastCat=Kaikei&lang=ja" class="dy-link">会計</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">48</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1748164440&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1748164440&rolls=100&nomagachas=nm%2Cne&lastCat=Kougeki&lang=ja" class="dy-link">攻撃</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">49</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=555356830&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=555356830&rolls=100&nomagachas=nm%2Cne&lastCat=Nuko&lang=ja" class="dy-link">ﾈｺ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">50</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3699516515&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3699516515&rolls=100&nomagachas=nm%2Cne&lastCat=Usi&lang=ja" class="dy-link">ｳｼ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">51</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1582204668&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1582204668&rolls=100&nomagachas=nm%2Cne&lastCat=Fish&lang=ja" class="dy-link">ﾌｨｯｼｭ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">52</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">
+              <a href="?seed=3073958538&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+            <div class="dycell-btm grp-z">
+              
+                <span class="dy-dest">&lt;-54A</span><a href="?seed=1358362430&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+              
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3073958538&rolls=100&nomagachas=nm%2Cne&lastCat=Osaihu&lang=ja" class="dy-link">財布</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">53</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=906653750&rolls=100&nomagachas=nm%2Cne&lastCat=100K&lang=ja" class="dy-link">10万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=906653750&rolls=100&nomagachas=nm%2Cne&lastCat=Kyojin&lang=ja" class="dy-link">巨神</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">54</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3262012409&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3262012409&rolls=100&nomagachas=nm%2Cne&lastCat=Nuko&lang=ja" class="dy-link">ﾈｺ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">55</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1152293842&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1152293842&rolls=100&nomagachas=nm%2Cne&lastCat=Tori&lang=ja" class="dy-link">ﾄﾘ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">56</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=916485855&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=916485855&rolls=100&nomagachas=nm%2Cne&lastCat=Kenkyuu&lang=ja" class="dy-link">研究</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">57</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3794934985&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3794934985&rolls=100&nomagachas=nm%2Cne&lastCat=Osaihu&lang=ja" class="dy-link">財布</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">58</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3802214671&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3802214671&rolls=100&nomagachas=nm%2Cne&lastCat=Nuko&lang=ja" class="dy-link">ﾈｺ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">59</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=205188840&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=205188840&rolls=100&nomagachas=nm%2Cne&lastCat=Kouritu&lang=ja" class="dy-link">効率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">60</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1471077135&rolls=100&nomagachas=nm%2Cne&lastCat=GekiMe&lang=ja" class="dy-link">【激】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1471077135&rolls=100&nomagachas=nm%2Cne&lastCat=Tousotu&lang=ja" class="dy-link">統率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">61</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1947718531&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1947718531&rolls=100&nomagachas=nm%2Cne&lastCat=Osaihu&lang=ja" class="dy-link">財布</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">62</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1381741028&rolls=100&nomagachas=nm%2Cne&lastCat=100K&lang=ja" class="dy-link">10万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1381741028&rolls=100&nomagachas=nm%2Cne&lastCat=Kyojin&lang=ja" class="dy-link">巨神</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">63</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=140530476&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=140530476&rolls=100&nomagachas=nm%2Cne&lastCat=Kimo&lang=ja" class="dy-link">ｷﾓ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">64</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=336972421&rolls=100&nomagachas=nm%2Cne&lastCat=5K&lang=ja" class="dy-link">0.5万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=336972421&rolls=100&nomagachas=nm%2Cne&lastCat=Kenkyuu&lang=ja" class="dy-link">研究</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">65</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=4092931662&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=4092931662&rolls=100&nomagachas=nm%2Cne&lastCat=Tairyoku&lang=ja" class="dy-link">体力</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">66</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3852014415&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3852014415&rolls=100&nomagachas=nm%2Cne&lastCat=Osaihu&lang=ja" class="dy-link">財布</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">67</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=780732009&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=780732009&rolls=100&nomagachas=nm%2Cne&lastCat=Kimo&lang=ja" class="dy-link">ｷﾓ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">68</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">
+              <a href="?seed=1088377903&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+            <div class="dycell-btm grp-z">
+              
+                <span class="dy-dest">&lt;-70A</span><a href="?seed=3671843074&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+              
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1088377903&rolls=100&nomagachas=nm%2Cne&lastCat=Kouritu&lang=ja" class="dy-link">効率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">69</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1606709887&rolls=100&nomagachas=nm%2Cne&lastCat=100K&lang=ja" class="dy-link">10万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1606709887&rolls=100&nomagachas=nm%2Cne&lastCat=Benkyou&lang=ja" class="dy-link">勉強</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">70</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=305972090&rolls=100&nomagachas=nm%2Cne&lastCat=CyoMe&lang=ja" class="dy-link">【超】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=305972090&rolls=100&nomagachas=nm%2Cne&lastCat=Charge&lang=ja" class="dy-link">ﾁｬｰｼﾞ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">71</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=989181579&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=989181579&rolls=100&nomagachas=nm%2Cne&lastCat=Tousotu&lang=ja" class="dy-link">統率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">72</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1873367972&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1873367972&rolls=100&nomagachas=nm%2Cne&lastCat=Tokage&lang=ja" class="dy-link">ﾄｶｹﾞ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">73</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1394663650&rolls=100&nomagachas=nm%2Cne&lastCat=100K&lang=ja" class="dy-link">10万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1394663650&rolls=100&nomagachas=nm%2Cne&lastCat=Fish&lang=ja" class="dy-link">ﾌｨｯｼｭ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">74</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3368560970&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3368560970&rolls=100&nomagachas=nm%2Cne&lastCat=Battle&lang=ja" class="dy-link">ﾊﾞﾄﾙ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">75</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1592044127&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">
+              <a href="?seed=1592044127&rolls=100&nomagachas=nm%2Cne&lastCat=Battle&lang=ja" class="dy-link">ﾊﾞﾄﾙ</a>
+            </div>
+            <div class="dycell-btm grp-b">
+              
+                <span class="dy-dest">&lt;-77A</span><a href="?seed=1550528392&rolls=100&nomagachas=nm%2Cne&lastCat=Charge&lang=ja" class="dy-link">ﾁｬｰｼﾞ</a>
+              
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">76</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=540586821&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=540586821&rolls=100&nomagachas=nm%2Cne&lastCat=Usi&lang=ja" class="dy-link">ｳｼ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">77</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1334270424&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1334270424&rolls=100&nomagachas=nm%2Cne&lastCat=Tairyoku&lang=ja" class="dy-link">体力</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">78</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3050269569&rolls=100&nomagachas=nm%2Cne&lastCat=5K&lang=ja" class="dy-link">0.5万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3050269569&rolls=100&nomagachas=nm%2Cne&lastCat=Usi&lang=ja" class="dy-link">ｳｼ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">79</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=229528587&rolls=100&nomagachas=nm%2Cne&lastCat=CyoMe&lang=ja" class="dy-link">【超】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=229528587&rolls=100&nomagachas=nm%2Cne&lastCat=Benkyou&lang=ja" class="dy-link">勉強</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">80</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1012429973&rolls=100&nomagachas=nm%2Cne&lastCat=100K&lang=ja" class="dy-link">10万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1012429973&rolls=100&nomagachas=nm%2Cne&lastCat=Nuko&lang=ja" class="dy-link">ﾈｺ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">81</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-d">&nbsp;</div>
+            <div class="dycell-btm grp-d">
+              <a href="?seed=1746389814&rolls=100&nomagachas=nm%2Cne&lastCat=GemiMe&lang=ja" class="dy-link">【闇】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">
+              <a href="?seed=1746389814&rolls=100&nomagachas=nm%2Cne&lastCat=Nuko&lang=ja" class="dy-link">ﾈｺ</a>
+            </div>
+            <div class="dycell-btm grp-b">
+              
+                <span class="dy-dest">&lt;-83A</span><a href="?seed=817251214&rolls=100&nomagachas=nm%2Cne&lastCat=Kouritu&lang=ja" class="dy-link">効率</a>
+              
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">82</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=120684525&rolls=100&nomagachas=nm%2Cne&lastCat=CyoMe&lang=ja" class="dy-link">【超】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=120684525&rolls=100&nomagachas=nm%2Cne&lastCat=Usi&lang=ja" class="dy-link">ｳｼ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">83</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1755552183&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1755552183&rolls=100&nomagachas=nm%2Cne&lastCat=Kimo&lang=ja" class="dy-link">ｷﾓ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">84</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3268656111&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3268656111&rolls=100&nomagachas=nm%2Cne&lastCat=Kouritu&lang=ja" class="dy-link">効率</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">85</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1221360562&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1221360562&rolls=100&nomagachas=nm%2Cne&lastCat=Fish&lang=ja" class="dy-link">ﾌｨｯｼｭ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">86</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1486327855&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1486327855&rolls=100&nomagachas=nm%2Cne&lastCat=Tank&lang=ja" class="dy-link">ﾀﾝｸ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">87</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1226681120&rolls=100&nomagachas=nm%2Cne&lastCat=100K&lang=ja" class="dy-link">10万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1226681120&rolls=100&nomagachas=nm%2Cne&lastCat=Kyojin&lang=ja" class="dy-link">巨神</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">88</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=4258210614&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=4258210614&rolls=100&nomagachas=nm%2Cne&lastCat=Osaihu&lang=ja" class="dy-link">財布</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">89</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2562512432&rolls=100&nomagachas=nm%2Cne&lastCat=ExMe&lang=ja" class="dy-link">【EX】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=2562512432&rolls=100&nomagachas=nm%2Cne&lastCat=Battle&lang=ja" class="dy-link">ﾊﾞﾄﾙ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">90</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=542901891&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=542901891&rolls=100&nomagachas=nm%2Cne&lastCat=Tokage&lang=ja" class="dy-link">ﾄｶｹﾞ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">91</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">
+              <a href="?seed=2098798686&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+            <div class="dycell-btm grp-z">
+              
+                <span class="dy-dest">&lt;-93A</span><a href="?seed=1064914135&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+              
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=2098798686&rolls=100&nomagachas=nm%2Cne&lastCat=Kaikei&lang=ja" class="dy-link">会計</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">92</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3308300198&rolls=100&nomagachas=nm%2Cne&lastCat=GekiMe&lang=ja" class="dy-link">【激】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3308300198&rolls=100&nomagachas=nm%2Cne&lastCat=Tokage&lang=ja" class="dy-link">ﾄｶｹﾞ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">93</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1439630467&rolls=100&nomagachas=nm%2Cne&lastCat=5K&lang=ja" class="dy-link">0.5万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=1439630467&rolls=100&nomagachas=nm%2Cne&lastCat=Osaihu&lang=ja" class="dy-link">財布</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">94</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1375320298&rolls=100&nomagachas=nm%2Cne&lastCat=5K&lang=ja" class="dy-link">0.5万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1375320298&rolls=100&nomagachas=nm%2Cne&lastCat=Kyojin&lang=ja" class="dy-link">巨神</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">95</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=4177610421&rolls=100&nomagachas=nm%2Cne&lastCat=5K&lang=ja" class="dy-link">0.5万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=4177610421&rolls=100&nomagachas=nm%2Cne&lastCat=Kenkyuu&lang=ja" class="dy-link">研究</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">96</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=2714815943&rolls=100&nomagachas=nm%2Cne&lastCat=5K&lang=ja" class="dy-link">0.5万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=2714815943&rolls=100&nomagachas=nm%2Cne&lastCat=Kyojin&lang=ja" class="dy-link">巨神</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">97</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=1509805732&rolls=100&nomagachas=nm%2Cne&lastCat=ReaMe&lang=ja" class="dy-link">【ﾚｱ】</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=1509805732&rolls=100&nomagachas=nm%2Cne&lastCat=Tank&lang=ja" class="dy-link">ﾀﾝｸ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">98</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3520500451&rolls=100&nomagachas=nm%2Cne&lastCat=10K&lang=ja" class="dy-link">1万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-b">&nbsp;</div>
+            <div class="dycell-btm grp-b">
+              <a href="?seed=3520500451&rolls=100&nomagachas=nm%2Cne&lastCat=Charge&lang=ja" class="dy-link">ﾁｬｰｼﾞ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">99</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3438350616&rolls=100&nomagachas=nm%2Cne&lastCat=5K&lang=ja" class="dy-link">0.5万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3438350616&rolls=100&nomagachas=nm%2Cne&lastCat=Battle&lang=ja" class="dy-link">ﾊﾞﾄﾙ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <div class="dy-row">
+      <div class="dycell dy-num-col">
+        <div class="dycell-top dynum-top">100</div>
+        <div class="dycell-btm dynum-btm">&nbsp;</div>
+      </div>
+
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-z">&nbsp;</div>
+            <div class="dycell-btm grp-z">
+              <a href="?seed=3260352227&rolls=100&nomagachas=nm%2Cne&lastCat=30K&lang=ja" class="dy-link">3万</a>
+            </div>
+          
+        </div>
+      
+        
+        <div class="dycell dy-data-col">
+          
+            <div class="dycell-top grp-n">&nbsp;</div>
+            <div class="dycell-btm grp-n">
+              <a href="?seed=3260352227&rolls=100&nomagachas=nm%2Cne&lastCat=Kimo&lang=ja" class="dy-link">ｷﾓ</a>
+            </div>
+          
+        </div>
+      
+    </div>
+  
+</div>
+
+  </div>
+</div>
+
+</div>
+
+<script>
+  (function() {
+    var isstatic = location.pathname.endsWith('.html') || location.protocol === 'file:';
+    var basepath = isstatic ? './nomatora.html' : '/nomatora';
+    var formel = document.getElementById('nomatora-form');
+    if (formel) formel.action = basepath;
+
+    var storagekey = 'nomatora_saved_query';
+    var currentsearch = window.location.search;
+
+    if (!currentsearch || currentsearch === '?') {
+      var savedquery = localStorage.getItem(storagekey);
+      if (savedquery && savedquery !== '?') {
+        window.location.replace(basepath + savedquery);
+      }
+    } else {
+      localStorage.setItem(storagekey, currentsearch);
+    }
+  })();
+</script>
+
+<script src="./js/nomatora-static.js"></script>
+
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="copyright">©2026 DUOR◆NYANMA/rK7Ec</p>
+      <p class="powered-by">Powered by Gemini</p>
+    </div>
+  </footer>
+
+  <script>
+    if (location.pathname.endsWith('.html') || location.protocol === 'file:') {
+      document.querySelectorAll('a[data-static]').forEach(function(a) {
+        a.href = a.getAttribute('data-static');
+      });
+    }
+  </script>
+</body>
+</html>

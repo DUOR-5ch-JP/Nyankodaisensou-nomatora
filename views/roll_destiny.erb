@@ -1,0 +1,17 @@
+<div class="ally-gem mode-<%= langMode %>">
+  <div class="org-gem">
+    <%= erb :track_destiny, :locals => {
+      'trackRolls' => trueDestinyData['alpha'] || [],
+      'trackLabel' => 'A',
+      'baseParams' => baseParams,
+      'langMode' => langMode
+    } %>
+
+    <%= erb :track_destiny, :locals => {
+      'trackRolls' => trueDestinyData['beta'] || [],
+      'trackLabel' => 'B',
+      'baseParams' => baseParams,
+      'langMode' => langMode
+    } %>
+  </div>
+</div>
