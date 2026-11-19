@@ -292,9 +292,9 @@ document.addEventListener('DOMContentLoaded', function() {
   var dupeLabel = document.createElement('label');
   dupeLabel.innerHTML =
     'かぶり: <select id="nomatora-dupe-select">' +
-      '<option value="arrow"> → :標準</option>' +
-      '<option value="comma"> , :ｶﾝﾏ</option>' +
-      '<option value="bang"> ! :記号</option>' +
+      '<option value="arrow">標準</option>' +
+      '<option value="comma">ｶﾝﾏのみ</option>' +
+      '<option value="bang">記号のみ</option>' +
     '</select>';
   if (langLabel && langLabel.parentNode) {
     langLabel.parentNode.insertBefore(dupeLabel, langLabel.nextSibling);
