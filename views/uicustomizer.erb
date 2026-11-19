@@ -14,3 +14,409 @@
     background-repeat: no-repeat;
   }
 </style>
+
+<style id="uicustom-lang-mode-style">
+  .ally-gem.mode-short1 .dy-data-col {
+    width: auto !important;
+    min-width: 34px !important;
+  }
+  .ally-gem.mode-short2 .dy-data-col {
+    width: auto !important;
+    min-width: 24px !important;
+  }
+  .ally-gem.mode-short1 .dy-num-col,
+  .ally-gem.mode-short2 .dy-num-col {
+    width: 30px !important;
+  }
+
+  .ally-gem.dupe-comma .dycell-top,
+  .ally-gem.dupe-comma .dycell-btm,
+  .ally-gem.dupe-comma .dy-head,
+  .ally-gem.dupe-bang .dycell-top,
+  .ally-gem.dupe-bang .dycell-btm,
+  .ally-gem.dupe-bang .dy-head {
+    padding: 2px 3px !important;
+  }
+  .ally-gem.mode-short2.dupe-bang .dy-data-col {
+    min-width: 22px !important;
+  }
+
+  #nomatora-floating-tip {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    background-color: rgba(15, 15, 15, 0.92);
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 9px;
+    font-size: 0.98rem;
+    font-weight: bold;
+    line-height: 1.3;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    transition: opacity 0.1s ease;
+  }
+  #nomatora-floating-tip.is-visible {
+    opacity: 1;
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  var MASTER_DICT = {
+    'Normal+':  ['ﾉｰﾏﾙ+', '＋', '+'],
+    Fukubiki:   ['福引',   '福', 'F'],
+    FukubikiG:  ['福引G',  'Ｇ', 'G'],
+    Nekome:     ['猫目',   '眼', 'ﾒ'],
+    Matatabi:   ['ﾏﾀﾀﾋﾞ', '叉', 'ﾏ'],
+    Normal:     ['ﾉｰﾏﾙ',  '並', 'N'],
+
+    GemiMe:   ['【闇】', '闇', 'Y'],
+    btC:      ['BC',     'Ｃ', 'C'],
+    TRD:      ['TR',     'T',  'T'],
+    Kougeki:  ['攻撃',   '攻', 'K'],
+    Charge:   ['ﾁｬｰｼﾞ',  '充', 'K'],
+    Kouritu:  ['効率',   '効', 'K'],
+    Osaihu:   ['財布',   '財', 'K'],
+    Tairyoku: ['体力',   '体', 'K'],
+    Kenkyuu:  ['研究',   '研', 'K'],
+    Kaikei:   ['会計',   '会', 'K'],
+    Benkyou:  ['勉強',   '勉', 'K'],
+    Tousotu:  ['統率',   '統', 'K'],
+    Nuko:     ['ﾈｺ',     '猫', '2'],
+    Tank:     ['ﾀﾝｸ',    '壁', '2'],
+    Battle:   ['ﾊﾞﾄﾙ',   '斧', '2'],
+    Kimo:     ['ｷﾓ',     '奇', '2'],
+    Usi:      ['ｳｼ',     '牛', '2'],
+    Tori:     ['ﾄﾘ',     '鳥', '2'],
+    Fish:     ['ﾌｨｯｼｭ',  '魚', '2'],
+    Tokage:   ['ﾄｶｹﾞ',   '竜', '2'],
+    Kyojin:   ['巨神',   '巨', '2'],
+    Cyojin:   ['超人',   '超', '2'],
+    TiNuko:   ['ﾁﾋﾞﾈｺ',  '猫', '1'],
+    TiTank:   ['ﾁﾋﾞﾀﾝ',  '壁', '1'],
+    TiBattle: ['ﾁﾋﾞﾊﾞﾄ', '斧', '1'],
+    TiKimo:   ['ﾁﾋﾞｷﾓ',  '奇', '1'],
+    TiUsi:    ['ﾁﾋﾞｳｼ',  '牛', '1'],
+    TiTori:   ['ﾁﾋﾞﾄﾘ',  '鳥', '1'],
+    TiFish:   ['ﾁﾋﾞﾌｨ',  '魚', '1'],
+    TiToka:   ['ﾁﾋﾞﾄｶ',  '竜', '1'],
+    TiKyojin: ['ﾁﾋﾞｷｮ',  '巨', '1'],
+    '5K':     ['0.5万',  '.5', 'X'],
+    '10K':    ['1万',    '①', 'X'],
+    '30K':    ['3万',    '③', 'X'],
+    '50K':    ['5万',    '⑤', 'X'],
+    '100K':   ['10万',   '⑩', 'X'],
+    G100K:    ['10万',   '⑩', 'X'],
+    '200K':   ['20万',   '⑳', 'X'],
+    '500K':   ['50万',   '㊿', 'X'],
+    '1M':     ['100万',  '百', 'X'],
+    SPD:      ['SPD',    '速', 'U'],
+    CPU:      ['NPU',    '動', 'P'],
+    BON:      ['BON',    '凡', 'ﾎﾞ'],
+    OKM:      ['OKM',    '瓶', 'J'],
+    SNP:      ['SNP',    '砂', 'ﾊﾟ'],
+    btA:      ['BA',     'Ａ', 'A'],
+    btB:      ['BB',     'Ｂ', 'B'],
+    Muratane: ['紫ﾀﾈ',   'ﾑﾗ', 'ﾀ'],
+    Akatane:  ['赤ﾀﾈ',   'ｱｶ', 'ﾀ'],
+    Aotane:   ['青ﾀﾈ',   'ｱｵ', 'ﾀ'],
+    Midotane: ['緑ﾀﾈ',   'ﾐﾄﾞ','ﾀ'],
+    Keytane:  ['黄ﾀﾈ',   'ｷｲ', 'ﾀ'],
+    Muramt:   ['[紫]',   '紫', 'ﾑ'],
+    Akamt:    ['[赤]',   '赤', 'ｶ'],
+    Aomt:     ['[青]',   '青', 'ｵ'],
+    Midomt:   ['[緑]',   '緑', 'ﾐ'],
+    Keymt:    ['[黄]',   '黄', 'ｷ'],
+    Nijimt:   ['[虹]',   '虹', 'ﾆ'],
+    ExMe:     ['【EX】', 'Ｅ', 'E'],
+    ReaMe:    ['【ﾚｱ】', 'ﾚ',  'ﾚ'],
+    GekiMe:   ['【激】', 'ｹﾞ', 'ｹﾞ'],
+    CyoMe:    ['【超】', 'ﾁ',  'ﾁ']
+  };
+
+  var TIP_DICT = {
+    GemiMe:   '闇猫目',
+    btC:      'ﾋﾞﾀﾝC',
+    TRD:      'ﾄﾚｼﾞｬｰﾚｰﾀﾞｰ',
+    Kougeki:  '攻撃',
+    Charge:   'ﾁｬｰｼﾞ',
+    Kouritu:  '効率',
+    Osaihu:   '財布',
+    Tairyoku: '体力',
+    Kenkyuu:  '研究',
+    Kaikei:   '会計',
+    Benkyou:  '勉強',
+    Tousotu:  '統率',
+    Nuko:     'ﾈｺ',
+    Tank:     'ﾀﾝｸ',
+    Battle:   'ﾊﾞﾄﾙ',
+    Kimo:     'ｷﾓ',
+    Usi:      'ｳｼ',
+    Tori:     'ﾄﾘ',
+    Fish:     'ﾌｨｯｼｭ',
+    Tokage:   'ﾄｶｹﾞ',
+    Kyojin:   '巨神',
+    Cyojin:   '超人',
+    TiNuko:   'ﾁﾋﾞﾈｺ',
+    TiTank:   'ﾁﾋﾞﾀﾝｸ',
+    TiBattle: 'ﾁﾋﾞﾊﾞﾄﾙ',
+    TiKimo:   'ﾁﾋﾞｷﾓ',
+    TiUsi:    'ﾁﾋﾞｳｼ',
+    TiTori:   'ﾁﾋﾞﾄﾘ',
+    TiFish:   'ﾁﾋﾞﾌｨ',
+    TiToka:   'ﾁﾋﾞﾄｶ',
+    TiKyojin: 'ﾁﾋﾞｷｮ',
+    '5K':     '0.5万',
+    '10K':    '1万',
+    '30K':    '3万',
+    '50K':    '5万',
+    '100K':   '10万',
+    G100K:    '10万',
+    '200K':   '20万',
+    '500K':   '50万',
+    '1M':     '100万',
+    SPD:      'ｽﾋﾟｰﾄﾞｱｯﾌﾟ',
+    CPU:      'ﾆｬﾝﾋﾟｭｰﾀｰ',
+    BON:      'ﾈｺﾎﾞﾝ',
+    OKM:      'おかめ',
+    SNP:      'ｽﾆｬｲﾊﾟｰ',
+    btA:      'ﾋﾞﾀﾝA',
+    btB:      'ﾋﾞﾀﾝB',
+    Muratane: '紫ﾏﾀﾀﾋﾞﾀﾈ',
+    Akatane:  '赤ﾏﾀﾀﾋﾞﾀﾈ',
+    Aotane:   '青ﾏﾀﾀﾋﾞﾀﾈ',
+    Midotane: '緑ﾏﾀﾀﾋﾞﾀﾈ',
+    Keytane:  '黄ﾏﾀﾀﾋﾞﾀﾈ',
+    Muramt:   '紫ﾏﾀﾀﾋﾞ',
+    Akamt:    '赤ﾏﾀﾀﾋﾞ',
+    Aomt:     '青ﾏﾀﾀﾋﾞ',
+    Midomt:   '緑ﾏﾀﾀﾋﾞ',
+    Keymt:    '黄ﾏﾀﾀﾋﾞ',
+    Nijimt:   '虹ﾏﾀﾀﾋﾞ',
+    ExMe:     'EX猫目',
+    ReaMe:    'ﾚｱ猫目',
+    GekiMe:   '激ﾚｱ猫目',
+    CyoMe:    '超激ﾚｱ猫目'
+  };
+
+  var GACHA_KEY_RESOLVER = {
+    'n+': 'Normal+', 'Normal+': 'Normal+', 'ﾉｰﾏﾙ+': 'Normal+', '＋': 'Normal+', '＋+': 'Normal+',
+    'fu': 'Fukubiki', 'Fukubiki': 'Fukubiki', '福引': 'Fukubiki', '福': 'Fukubiki', '福F': 'Fukubiki',
+    'fg': 'FukubikiG', 'FukubikiG': 'FukubikiG', '福引G': 'FukubikiG', 'Ｇ': 'FukubikiG', 'ＧG': 'FukubikiG',
+    'ne': 'Nekome', 'Nekome': 'Nekome', '猫目': 'Nekome', '眼': 'Nekome', '眼ﾒ': 'Nekome',
+    'ma': 'Matatabi', 'Matatabi': 'Matatabi', 'ﾏﾀﾀﾋﾞ': 'Matatabi', '叉': 'Matatabi', '叉ﾏ': 'Matatabi',
+    'nm': 'Normal', 'Normal': 'Normal', 'ﾉｰﾏﾙ': 'Normal', '並': 'Normal', '並N': 'Normal'
+  };
+
+  function translateKey(key, mode) {
+    if (!key) return '';
+    if (mode === 'en') return key;
+    var entry = MASTER_DICT[key];
+    if (!entry) return key;
+    if (mode === 'short1') return entry;
+    if (mode === 'short2') return entry;
+    return entry;
+  }
+
+  function translateTipName(key) {
+    if (!key) return '';
+    return TIP_DICT[key] || translateKey(key, 'ja');
+  }
+
+  var MODE_KEY = 'nomatora_custom_lang_mode';
+  var DUPE_KEY = 'nomatora_custom_dupe_mode';
+  var TIP_ENABLED_KEY = 'nomatora_tip_enabled';
+  window.nomatoraTipEnabled = localStorage.getItem(TIP_ENABLED_KEY) !== 'false';
+
+  var form = document.getElementById('nomatora-form');
+  if (!form) return;
+
+  var langSelect = form.querySelector('select[name="lang"]');
+  if (!langSelect) return;
+
+  var qp = new URLSearchParams(window.location.search);
+  var urlLang = qp.get('lang');
+  var currentMode = urlLang || localStorage.getItem(MODE_KEY) || 'ja';
+  if (!['ja', 'short1', 'short2', 'en'].includes(currentMode)) {
+    currentMode = 'ja';
+  }
+
+  var currentDupeMode = localStorage.getItem(DUPE_KEY) || 'arrow';
+  if (!['arrow', 'comma', 'bang'].includes(currentDupeMode)) {
+    currentDupeMode = 'arrow';
+  }
+
+  langSelect.removeAttribute('onchange');
+  langSelect.innerHTML =
+    '<option value="ja">標準</option>' +
+    '<option value="short1">短縮</option>' +
+    '<option value="short2">熟練</option>' +
+    '<option value="en">ローマ字</option>';
+  langSelect.value = currentMode;
+
+  var langLabel = langSelect.closest('label');
+  var dupeLabel = document.createElement('label');
+  dupeLabel.innerHTML =
+    'かぶり: <select id="nomatora-dupe-select">' +
+      '<option value="arrow"> → :標準</option>' +
+      '<option value="comma"> , :ｶﾝﾏ</option>' +
+      '<option value="bang"> ! :記号</option>' +
+    '</select>';
+  if (langLabel && langLabel.parentNode) {
+    langLabel.parentNode.insertBefore(dupeLabel, langLabel.nextSibling);
+  }
+  var dupeSelect = document.getElementById('nomatora-dupe-select');
+  dupeSelect.value = currentDupeMode;
+
+  var tipEl = document.getElementById('nomatora-floating-tip');
+  if (!tipEl) {
+    tipEl = document.createElement('div');
+    tipEl.id = 'nomatora-floating-tip';
+    document.body.appendChild(tipEl);
+  }
+
+  function applyDisplayModes() {
+    var mode = langSelect.value;
+    var dupeMode = dupeSelect.value;
+    localStorage.setItem(MODE_KEY, mode);
+    localStorage.setItem(DUPE_KEY, dupeMode);
+
+    var container = document.querySelector('.ally-gem');
+    if (container) {
+      container.classList.remove(
+        'mode-ja', 'mode-short1', 'mode-short2', 'mode-en',
+        'dupe-arrow', 'dupe-comma', 'dupe-bang'
+      );
+      container.classList.add('mode-' + mode, 'dupe-' + dupeMode);
+    }
+
+    form.querySelectorAll('input[name="nomagachas_selected"]').forEach(function(cb) {
+      var gachaKey = GACHA_KEY_RESOLVER[cb.value];
+      if (!gachaKey) return;
+      var lbl = cb.closest('label');
+      if (!lbl) return;
+      var textNode = Array.from(lbl.childNodes).find(function(n) {
+        return n.nodeType === Node.TEXT_NODE && n.textContent.trim().length > 0;
+      });
+      var labelText = ' ' + translateKey(gachaKey, mode);
+      if (textNode) {
+        textNode.textContent = labelText;
+      } else {
+        lbl.appendChild(document.createTextNode(labelText));
+      }
+    });
+
+    document.querySelectorAll('.dy-head.dy-data-col').forEach(function(headEl) {
+      var gachaKey = headEl.dataset.gachaKey;
+      if (!gachaKey) {
+        var raw = headEl.textContent.trim();
+        gachaKey = GACHA_KEY_RESOLVER[raw];
+        if (gachaKey) headEl.dataset.gachaKey = gachaKey;
+      }
+      if (gachaKey) {
+        headEl.textContent = translateKey(gachaKey, mode);
+      }
+    });
+
+
+    document.querySelectorAll('.dycell .dy-link').forEach(function(linkEl) {
+      var key = linkEl.dataset.unitKey;
+      if (!key) {
+        try {
+          var href = linkEl.getAttribute('href') || '';
+          var m = href.match(/[?&]lastCat=([^&]+)/);
+          if (m) key = decodeURIComponent(m);
+        } catch (e) {}
+        if (key) linkEl.dataset.unitKey = key;
+      }
+
+      var btmCell = linkEl.closest('.dycell-btm');
+      var destSpan = btmCell ? btmCell.querySelector('.dy-dest') : null;
+      var tipUnitName = key ? translateTipName(key) : linkEl.textContent.trim();
+
+      if (destSpan) {
+
+        var origDest = destSpan.dataset.origDest;
+        if (!origDest) {
+          origDest = destSpan.textContent.trim();
+          destSpan.dataset.origDest = origDest;
+        }
+        linkEl.dataset.tip = tipUnitName + origDest;
+
+        if (dupeMode === 'bang') {
+
+          destSpan.style.display = 'none';
+          linkEl.textContent = '!';
+        } else if (dupeMode === 'comma') {
+
+          var destNum = origDest.replace(/\D/g, '');
+          destSpan.style.display = 'inline';
+          destSpan.textContent = ',' + destNum;
+          if (key) linkEl.textContent = translateKey(key, mode);
+        } else {
+
+          destSpan.style.display = 'inline';
+          destSpan.textContent = origDest;
+          if (key) linkEl.textContent = translateKey(key, mode);
+        }
+      } else {
+
+        linkEl.dataset.tip = tipUnitName;
+        if (key) linkEl.textContent = translateKey(key, mode);
+      }
+
+      try {
+        var u = new URL(linkEl.href, window.location.href);
+        u.searchParams.set('lang', mode);
+        linkEl.setAttribute('href', u.search);
+      } catch (e) {}
+    });
+  }
+
+  function showTip(el, clientX, clientY) {
+    if (!window.nomatoraTipEnabled) return;
+    var txt = el.dataset.tip;
+    if (!txt) return;
+    tipEl.textContent = txt;
+    tipEl.classList.add('is-visible');
+    var x = Math.min(window.innerWidth - tipEl.offsetWidth - 10, Math.max(8, clientX - 10));
+    var y = Math.max(8, clientY - tipEl.offsetHeight - 14);
+    tipEl.style.left = x + 'px';
+    tipEl.style.top = y + 'px';
+  }
+  function hideTip() {
+    tipEl.classList.remove('is-visible');
+  }
+
+  document.addEventListener('mouseover', function(e) {
+    var link = e.target.closest('.dy-link');
+    if (link) {
+      var rect = link.getBoundingClientRect();
+      showTip(link, rect.left, rect.top);
+    }
+  });
+  document.addEventListener('mouseout', function(e) {
+    if (e.target.closest('.dy-link')) hideTip();
+  });
+  document.addEventListener('touchstart', function(e) {
+    var link = e.target.closest('.dy-link');
+    if (link && e.touches && e.touches[0]) {
+      showTip(link, e.touches[0].clientX, e.touches[0].clientY);
+    } else {
+      hideTip();
+    }
+  }, { passive: true });
+
+  langSelect.addEventListener('change', applyDisplayModes);
+  dupeSelect.addEventListener('change', applyDisplayModes);
+
+  applyDisplayModes();
+  setTimeout(applyDisplayModes, 50);
+});
+</script>
+
+
