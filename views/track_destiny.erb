@@ -43,11 +43,7 @@
               <a href="<%= href1 %>" class="dy-link"><%= label1 %></a>
             </div>
             <div class="dycell-btm <%= grp2 %>">
-              <% if trackLabel == 'B' %>
-                <span class="dy-dest">&lt;-<%= warp['dest'] %></span><a href="<%= href2 %>" class="dy-link"><%= label2 %></a>
-              <% else %>
-                <a href="<%= href2 %>" class="dy-link"><%= label2 %></a><span class="dy-dest">-&gt;<%= warp['dest'] %></span>
-              <% end %>
+              <a href="<%= href2 %>" class="dy-link"><%= label2 %></a><span class="dy-dest"><%= trackLabel == 'B' ? '←' : '→' %><%= warp['dest'] %></span>
             </div>
           <% else %>
             <div class="dycell-top <%= grp1 %>">&nbsp;</div>

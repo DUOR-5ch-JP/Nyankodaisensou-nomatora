@@ -210,12 +210,11 @@
           const l2 = fmtLabel(u2.id, lang);
           const href2 = `?${qs({ ...base, seed: String(step(u2.seed)), lastCat: u2.id })}`;
           const dest = node.warp.dest || '';
+
+          const arrow = label === 'B' ? '←' : '→';
           h += `<div class="dycell-top ${g1}"><a href="${href1}" class="dy-link">${l1}</a></div>`;
-          h += `<div class="dycell-btm ${g2}">`;
-          h += label === 'B'
-            ? `<span class="dy-dest">&lt;-${dest}</span><a href="${href2}" class="dy-link">${l2}</a>`
-            : `<a href="${href2}" class="dy-link">${l2}</a><span class="dy-dest">-&gt;${dest}</span>`;
-          h += '</div>';
+          h += `<div class="dycell-btm ${g2}"><a href="${href2}" class="dy-link">${l2}</a><span class="dy-dest">${arrow}${dest}</span></div>`;
+
         } else {
           h += `<div class="dycell-top ${g1}">&nbsp;</div>`;
           h += `<div class="dycell-btm ${g1}"><a href="${href1}" class="dy-link">${l1}</a></div>`;
