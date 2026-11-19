@@ -247,9 +247,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (mode === 'en') return key;
     var entry = MASTER_DICT[key];
     if (!entry) return key;
-    if (mode === 'short1') return entry;
-    if (mode === 'short2') return entry;
-    return entry;
+    if (mode === 'short1') return entry[1];
+    if (mode === 'short2') return entry[2];
+    return entry[0];
   }
 
   function translateTipName(key) {
@@ -359,7 +359,7 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
           var href = linkEl.getAttribute('href') || '';
           var m = href.match(/[?&]lastCat=([^&]+)/);
-          if (m) key = decodeURIComponent(m);
+          if (m && m[1]) key = decodeURIComponent(m[1]);
         } catch (e) {}
         if (key) linkEl.dataset.unitKey = key;
       }
