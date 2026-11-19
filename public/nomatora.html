@@ -189,6 +189,11 @@
     font-weight: bold;
     cursor: grab;
   }
+  .gacha-cfg-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
   .gacha-cfg-arrows {
     display: flex;
     gap: 2px;
@@ -475,49 +480,63 @@ cfgWrap.innerHTML =
     '<button type="button" class="gacha-cfg-reset" id="gacha-cfg-reset">初期順に戻す</button>' +
   '</div>';
 
-if (gachaArea) {
-gachaArea.appendChild(cfgWrap);
-}
-var popEl = document.getElementById('gacha-cfg-pop');
-var listEl = document.getElementById('gacha-cfg-list');
-function applyGachaLayout() {
-if (!gachaArea) return;
-var orderCodes = gachaCfgList.map(function(item) { return item.code; });
-gachaCfgList.forEach(function(item) {
-var lbl = labelMap[item.code];
-if (lbl) {
-lbl.style.display = item.visible ? 'inline-block' : 'none';
-gachaArea.insertBefore(lbl, cfgWrap);
-}
-});
-document.querySelectorAll('.dy-maint').forEach(function(maint) {
-var rows = Array.from(maint.querySelectorAll('.dy-row'));
-if (!rows.length) return;
-var headCols = Array.from(rows[0].querySelectorAll('.dy-data-col'));
-var currentKeys = headCols.map(function(el) {
-if (el.dataset.gachaKey) return el.dataset.gachaKey;
-var raw = el.textContent.trim();
-var resolved = GACHA_KEY_RESOLVER[raw] || '';
-if (resolved) el.dataset.gachaKey = resolved;
-return resolved;
-});
-var orderKeys = orderCodes.map(function(c) { return CODE_TO_KEY[c]; });
-var sortedIndices = currentKeys
-.map(function(k, idx) {
-var pos = orderKeys.indexOf(k);
-return { idx: idx, pos: pos === -1 ? 999 : pos };
-})
-.sort(function(a, b) { return a.pos - b.pos; })
-.map(function(o) { return o.idx; });
-rows.forEach(function(row) {
-var dataCols = Array.from(row.querySelectorAll('.dy-data-col'));
-if (dataCols.length !== sortedIndices.length) return;
-sortedIndices.forEach(function(origIdx) {
-row.appendChild(dataCols[origIdx]);
-});
-});
-});
-}
+  if (gachaArea) {
+  gachaArea.appendChild(cfgWrap);
+  }
+  var popEl = document.getElementById('gacha-cfg-pop');
+  var listEl = document.getElementById('gacha-cfg-list');
+
+  function applyGachaLayout() {
+    if (!gachaArea) return;
+    var orderCodes = gachaCfgList.map(function(item) { return item.code; });
+    var visibleKeyMap = {};
+
+    gachaCfgList.forEach(function(item) {
+      var gKey = CODE_TO_KEY[item.code];
+      visibleKeyMap[gKey] = item.visible;
+
+      var lbl = labelMap[item.code];
+      if (lbl) {
+        lbl.style.display = item.visible ? 'inline-block' : 'none';
+        gachaArea.insertBefore(lbl, cfgWrap);
+      }
+    });
+
+    document.querySelectorAll('.dy-maint').forEach(function(maint) {
+      var rows = Array.from(maint.querySelectorAll('.dy-row'));
+      if (!rows.length) return;
+
+      var headCols = Array.from(rows[0].querySelectorAll('.dy-data-col'));
+      var currentKeys = headCols.map(function(el) {
+        if (el.dataset.gachaKey) return el.dataset.gachaKey;
+        var raw = el.textContent.trim();
+        var resolved = GACHA_KEY_RESOLVER[raw] || '';
+        if (resolved) el.dataset.gachaKey = resolved;
+        return resolved;
+      });
+
+      var orderKeys = orderCodes.map(function(c) { return CODE_TO_KEY[c]; });
+      var sortedMeta = currentKeys
+        .map(function(k, idx) {
+          var pos = orderKeys.indexOf(k);
+          var isVis = (k in visibleKeyMap) ? visibleKeyMap[k] : true;
+          return { idx: idx, pos: pos === -1 ? 999 : pos, visible: isVis };
+        })
+        .sort(function(a, b) { return a.pos - b.pos; });
+
+      rows.forEach(function(row) {
+        var dataCols = Array.from(row.querySelectorAll('.dy-data-col'));
+        if (dataCols.length !== sortedMeta.length) return;
+        sortedMeta.forEach(function(meta) {
+          var colEl = dataCols[meta.idx];
+          colEl.style.display = meta.visible ? '' : 'none';
+          row.appendChild(colEl);
+        });
+      });
+    });
+  }
+
+
 var dragSrcIdx = null;
 function moveGachaItem(fromIdx, toIdx) {
 if (fromIdx === toIdx || toIdx < 0 || toIdx >= gachaCfgList.length) return;
@@ -539,15 +558,18 @@ li.className = 'gacha-cfg-item';
 li.draggable = true;
 li.dataset.idx = idx;
 li.innerHTML =
-  '<div class="gacha-cfg-left">' +
-    '<span class="gacha-cfg-grip">☰</span>' +
-    '<input type="checkbox" ' + (item.visible ? 'checked' : '') + '>' +
-    '<span>' + dispName + '</span>' +
-  '</div>' +
-  '<div class="gacha-cfg-arrows">' +
-    '<button type="button" class="btn-up">▲</button>' +
-    '<button type="button" class="btn-dn">▼</button>' +
-  '</div>';
+        '<div class="gacha-cfg-left">' +
+          '<span class="gacha-cfg-grip">☰</span>' +
+          '<span>' + dispName + '</span>' +
+        '</div>' +
+        '<div class="gacha-cfg-right">' +
+          '<input type="checkbox" ' + (item.visible ? 'checked' : '') + '>' +
+          '<div class="gacha-cfg-arrows">' +
+            '<button type="button" class="btn-up">▲</button>' +
+            '<button type="button" class="btn-dn">▼</button>' +
+          '</div>' +
+        '</div>';
+
 var cb = li.querySelector('input[type="checkbox"]');
 cb.addEventListener('change', function() {
 gachaCfgList[idx].visible = cb.checked;
