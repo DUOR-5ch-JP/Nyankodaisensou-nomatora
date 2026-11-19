@@ -16,29 +16,34 @@
 </style>
 
 <style id="uicustom-lang-mode-style">
-  .ally-gem.mode-short1 .dy-data-col {
-    width: auto !important;
-    min-width: 34px !important;
-  }
-  .ally-gem.mode-short2 .dy-data-col {
-    width: auto !important;
-    min-width: 24px !important;
-  }
   .ally-gem.mode-short1 .dy-num-col,
   .ally-gem.mode-short2 .dy-num-col {
-    width: 30px !important;
+    width: 28px !important;
   }
 
-  .ally-gem.dupe-comma .dycell-top,
-  .ally-gem.dupe-comma .dycell-btm,
-  .ally-gem.dupe-comma .dy-head,
-  .ally-gem.dupe-bang .dycell-top,
-  .ally-gem.dupe-bang .dycell-btm,
-  .ally-gem.dupe-bang .dy-head {
-    padding: 2px 3px !important;
-  }
-  .ally-gem.mode-short2.dupe-bang .dy-data-col {
-    min-width: 22px !important;
+  .ally-gem.mode-short2.dupe-bang  .dy-data-col { width: 24px !important; }
+  .ally-gem.mode-short2.dupe-comma .dy-data-col { width: 52px !important; }
+  .ally-gem.mode-short2.dupe-arrow .dy-data-col { width: 66px !important; }
+
+  .ally-gem.mode-short1.dupe-bang  .dy-data-col { width: 28px !important; }
+  .ally-gem.mode-short1.dupe-comma .dy-data-col { width: 58px !important; }
+  .ally-gem.mode-short1.dupe-arrow .dy-data-col { width: 72px !important; }
+
+  .ally-gem.mode-ja.dupe-bang  .dy-data-col { width: 54px !important; }
+  .ally-gem.mode-ja.dupe-comma .dy-data-col { width: 78px !important; }
+  .ally-gem.mode-ja.dupe-arrow .dy-data-col { width: 92px !important; }
+
+  .ally-gem.mode-en.dupe-bang  .dy-data-col { width: 74px !important; }
+  .ally-gem.mode-en.dupe-comma .dy-data-col { width: 96px !important; }
+  .ally-gem.mode-en.dupe-arrow .dy-data-col { width: 108px !important; }
+
+  .ally-gem.mode-short1 .dycell-top,
+  .ally-gem.mode-short1 .dycell-btm,
+  .ally-gem.mode-short1 .dy-head,
+  .ally-gem.mode-short2 .dycell-top,
+  .ally-gem.mode-short2 .dycell-btm,
+  .ally-gem.mode-short2 .dy-head {
+    padding: 2px 1px !important;
   }
 
   #nomatora-floating-tip {
@@ -61,11 +66,126 @@
   #nomatora-floating-tip.is-visible {
     opacity: 1;
   }
+
+  .gacha-cfg-wrap {
+    position: relative;
+    display: inline-block;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+  .gacha-cfg-btn {
+    padding: 2px 8px;
+    font-size: 0.78rem;
+    font-weight: bold;
+    color: #333;
+    background: #f0f0f0;
+    border: 1px solid #999;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .gacha-cfg-btn:hover {
+    background: #e2e2e2;
+  }
+  .gacha-cfg-pop {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    z-index: 2000;
+    width: 225px;
+    background: #ffffff;
+    border: 1px solid #666;
+    border-radius: 6px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    padding: 8px;
+    box-sizing: border-box;
+    text-align: left;
+  }
+  .gacha-cfg-pop.is-open {
+    display: block;
+  }
+  .gacha-cfg-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #444;
+    padding-bottom: 6px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #ddd;
+  }
+  .gacha-cfg-close {
+    background: none;
+    border: none;
+    font-size: 0.95rem;
+    cursor: pointer;
+    color: #666;
+    padding: 0 4px;
+  }
+  .gacha-cfg-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .gacha-cfg-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 6px;
+    background: #f8f9fa;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    user-select: none;
+    touch-action: none;
+  }
+  .gacha-cfg-item.is-dragging {
+    opacity: 0.55;
+    background: #e3f2fd;
+    border-color: #1976d2;
+  }
+  .gacha-cfg-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: grab;
+  }
+  .gacha-cfg-grip {
+    color: #888;
+    font-weight: bold;
+    cursor: grab;
+  }
+  .gacha-cfg-arrows {
+    display: flex;
+    gap: 2px;
+  }
+  .gacha-cfg-arrows button {
+    padding: 1px 5px;
+    font-size: 0.68rem;
+    background: #fff;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  .gacha-cfg-reset {
+    margin-top: 6px;
+    width: 100%;
+    padding: 3px;
+    font-size: 0.72rem;
+    color: #555;
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+  }
 </style>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-
   var MASTER_DICT = {
     'Normal+':  ['ﾉｰﾏﾙ+', '＋', '+'],
     Fukubiki:   ['福引',   '福', 'F'],
@@ -212,6 +332,15 @@ document.addEventListener('DOMContentLoaded', function() {
     'nm': 'Normal', 'Normal': 'Normal', 'ﾉｰﾏﾙ': 'Normal', '並': 'Normal', '並N': 'Normal'
   };
 
+  var CODE_TO_KEY = {
+    'n+': 'Normal+',
+    'fu': 'Fukubiki',
+    'fg': 'FukubikiG',
+    'ne': 'Nekome',
+    'ma': 'Matatabi',
+    'nm': 'Normal'
+  };
+
   function translateKey(key, mode) {
     if (!key) return '';
     if (mode === 'en') return key;
@@ -224,199 +353,370 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function translateTipName(key) {
     if (!key) return '';
-    return TIP_DICT[key] || translateKey(key, 'ja');
-  }
+return TIP_DICT[key] || translateKey(key, 'ja');
+}
+var MODE_KEY = 'nomatora_custom_lang_mode';
+var DUPE_KEY = 'nomatora_custom_dupe_mode';
+var TIP_ENABLED_KEY = 'nomatora_tip_enabled';
+var GACHA_CFG_KEY = 'nomatora_gacha_ui_cfg_v1';
+window.nomatoraTipEnabled = localStorage.getItem(TIP_ENABLED_KEY) !== 'false';
+var form = document.getElementById('nomatora-form');
+if (!form) return;
+var langSelect = form.querySelector('select[name="lang"]');
+if (!langSelect) return;
+var qp = new URLSearchParams(window.location.search);
+var urlLang = qp.get('lang');
+var currentMode = urlLang || localStorage.getItem(MODE_KEY) || 'ja';
+if (!['ja', 'short1', 'short2', 'en'].includes(currentMode)) {
+currentMode = 'ja';
+}
+var currentDupeMode = localStorage.getItem(DUPE_KEY) || 'arrow';
+if (!['arrow', 'comma', 'bang'].includes(currentDupeMode)) {
+currentDupeMode = 'arrow';
+}
+langSelect.removeAttribute('onchange');
+langSelect.innerHTML =
+  '<option value="ja">標準</option>' +
+  '<option value="short1">短縮</option>' +
+  '<option value="short2">熟練</option>' +
+  '<option value="en">ローマ字</option>';
+langSelect.value = currentMode;
+var langLabel = langSelect.closest('label');
+var dupeLabel = document.createElement('label');
+dupeLabel.innerHTML =
+  'かぶり: <select id="nomatora-dupe-select">' +
+    '<option value="arrow"> → :標準</option>' +
+    '<option value="comma"> , :ｶﾝﾏ</option>' +
+    '<option value="bang"> ! :記号</option>' +
+  '</select>';
+if (langLabel && langLabel.parentNode) {
+langLabel.parentNode.insertBefore(dupeLabel, langLabel.nextSibling);
+}
+var dupeSelect = document.getElementById('nomatora-dupe-select');
+dupeSelect.value = currentDupeMode;
+var tipEl = document.getElementById('nomatora-floating-tip');
+if (!tipEl) {
+tipEl = document.createElement('div');
+tipEl.id = 'nomatora-floating-tip';
+document.body.appendChild(tipEl);
+}
 
-  var MODE_KEY = 'nomatora_custom_lang_mode';
-  var DUPE_KEY = 'nomatora_custom_dupe_mode';
-  var TIP_ENABLED_KEY = 'nomatora_tip_enabled';
-  window.nomatoraTipEnabled = localStorage.getItem(TIP_ENABLED_KEY) !== 'false';
+var DEFAULT_GACHA_LIST = [
+{ code: 'n+', visible: true },
+{ code: 'fu', visible: true },
+{ code: 'fg', visible: true },
+{ code: 'ne', visible: true },
+{ code: 'ma', visible: true },
+{ code: 'nm', visible: true }
+];
+function loadGachaCfg() {
+try {
+var raw = localStorage.getItem(GACHA_CFG_KEY);
+if (!raw) return JSON.parse(JSON.stringify(DEFAULT_GACHA_LIST));
+var saved = JSON.parse(raw);
+if (!Array.isArray(saved) || saved.length !== 6) return JSON.parse(JSON.stringify(DEFAULT_GACHA_LIST));
+return saved;
+} catch (e) {
+return JSON.parse(JSON.stringify(DEFAULT_GACHA_LIST));
+}
+}
+function saveGachaCfg(list) {
+try { localStorage.setItem(GACHA_CFG_KEY, JSON.stringify(list)); } catch (e) {}
+}
+var gachaCfgList = loadGachaCfg();
+var checkboxes = Array.from(form.querySelectorAll('input[name="nomagachas_selected"]'));
+var gachaArea = checkboxes.length ? checkboxes[0].closest('div') : null;
+var labelMap = {};
+checkboxes.forEach(function(cb) {
+var lbl = cb.closest('label');
+if (lbl) labelMap[cb.value] = lbl;
+});
+var cfgWrap = document.createElement('span');
+cfgWrap.className = 'gacha-cfg-wrap';
+cfgWrap.innerHTML =
 
-  var form = document.getElementById('nomatora-form');
-  if (!form) return;
+  '<button type="button" class="gacha-cfg-btn" id="gacha-cfg-toggle">⚙列設定</button>' +
+  '<div class="gacha-cfg-pop" id="gacha-cfg-pop">' +
+    '<div class="gacha-cfg-head">' +
+      '<span>ガチャ列の並び・表示</span>' +
+      '<button type="button" class="gacha-cfg-close" id="gacha-cfg-close">✕</button>' +
+    '</div>' +
+    '<ul class="gacha-cfg-list" id="gacha-cfg-list"></ul>' +
+    '<button type="button" class="gacha-cfg-reset" id="gacha-cfg-reset">初期順に戻す</button>' +
+  '</div>';
 
-  var langSelect = form.querySelector('select[name="lang"]');
-  if (!langSelect) return;
-
-  var qp = new URLSearchParams(window.location.search);
-  var urlLang = qp.get('lang');
-  var currentMode = urlLang || localStorage.getItem(MODE_KEY) || 'ja';
-  if (!['ja', 'short1', 'short2', 'en'].includes(currentMode)) {
-    currentMode = 'ja';
-  }
-
-  var currentDupeMode = localStorage.getItem(DUPE_KEY) || 'arrow';
-  if (!['arrow', 'comma', 'bang'].includes(currentDupeMode)) {
-    currentDupeMode = 'arrow';
-  }
-
-  langSelect.removeAttribute('onchange');
-  langSelect.innerHTML =
-    '<option value="ja">標準</option>' +
-    '<option value="short1">短縮</option>' +
-    '<option value="short2">熟練</option>' +
-    '<option value="en">ローマ字</option>';
-  langSelect.value = currentMode;
-
-  var langLabel = langSelect.closest('label');
-  var dupeLabel = document.createElement('label');
-  dupeLabel.innerHTML =
-    'かぶり: <select id="nomatora-dupe-select">' +
-      '<option value="arrow">標準</option>' +
-      '<option value="comma">ｶﾝﾏのみ</option>' +
-      '<option value="bang">記号のみ</option>' +
-    '</select>';
-  if (langLabel && langLabel.parentNode) {
-    langLabel.parentNode.insertBefore(dupeLabel, langLabel.nextSibling);
-  }
-  var dupeSelect = document.getElementById('nomatora-dupe-select');
-  dupeSelect.value = currentDupeMode;
-
-  var tipEl = document.getElementById('nomatora-floating-tip');
-  if (!tipEl) {
-    tipEl = document.createElement('div');
-    tipEl.id = 'nomatora-floating-tip';
-    document.body.appendChild(tipEl);
-  }
-
-  function applyDisplayModes() {
-    var mode = langSelect.value;
-    var dupeMode = dupeSelect.value;
-    localStorage.setItem(MODE_KEY, mode);
-    localStorage.setItem(DUPE_KEY, dupeMode);
-
-    var container = document.querySelector('.ally-gem');
-    if (container) {
-      container.classList.remove(
-        'mode-ja', 'mode-short1', 'mode-short2', 'mode-en',
-        'dupe-arrow', 'dupe-comma', 'dupe-bang'
-      );
-      container.classList.add('mode-' + mode, 'dupe-' + dupeMode);
-    }
-
-    form.querySelectorAll('input[name="nomagachas_selected"]').forEach(function(cb) {
-      var gachaKey = GACHA_KEY_RESOLVER[cb.value];
-      if (!gachaKey) return;
-      var lbl = cb.closest('label');
-      if (!lbl) return;
-      var textNode = Array.from(lbl.childNodes).find(function(n) {
-        return n.nodeType === Node.TEXT_NODE && n.textContent.trim().length > 0;
-      });
-      var labelText = ' ' + translateKey(gachaKey, mode);
-      if (textNode) {
-        textNode.textContent = labelText;
-      } else {
-        lbl.appendChild(document.createTextNode(labelText));
-      }
-    });
-
-    document.querySelectorAll('.dy-head.dy-data-col').forEach(function(headEl) {
-      var gachaKey = headEl.dataset.gachaKey;
-      if (!gachaKey) {
-        var raw = headEl.textContent.trim();
-        gachaKey = GACHA_KEY_RESOLVER[raw];
-        if (gachaKey) headEl.dataset.gachaKey = gachaKey;
-      }
-      if (gachaKey) {
-        headEl.textContent = translateKey(gachaKey, mode);
-      }
-    });
-
-
-    document.querySelectorAll('.dycell .dy-link').forEach(function(linkEl) {
-      var key = linkEl.dataset.unitKey;
-      if (!key) {
-        try {
-          var href = linkEl.getAttribute('href') || '';
-          var m = href.match(/[?&]lastCat=([^&]+)/);
-          if (m && m[1]) key = decodeURIComponent(m[1]);
-        } catch (e) {}
-        if (key) linkEl.dataset.unitKey = key;
-      }
-
-      var btmCell = linkEl.closest('.dycell-btm');
-      var destSpan = btmCell ? btmCell.querySelector('.dy-dest') : null;
-      var tipUnitName = key ? translateTipName(key) : linkEl.textContent.trim();
-
-      if (destSpan) {
-
-        var origDest = destSpan.dataset.origDest;
-        if (!origDest) {
-          origDest = destSpan.textContent.trim();
-          destSpan.dataset.origDest = origDest;
-        }
-        linkEl.dataset.tip = tipUnitName + origDest;
-
-        if (dupeMode === 'bang') {
-
-          destSpan.style.display = 'none';
-          linkEl.textContent = '!';
-        } else if (dupeMode === 'comma') {
-
-          var destNum = origDest.replace(/\D/g, '');
-          destSpan.style.display = 'inline';
-          destSpan.textContent = ',' + destNum;
-          if (key) linkEl.textContent = translateKey(key, mode);
-        } else {
-
-          destSpan.style.display = 'inline';
-          destSpan.textContent = origDest;
-          if (key) linkEl.textContent = translateKey(key, mode);
-        }
-      } else {
-
-        linkEl.dataset.tip = tipUnitName;
-        if (key) linkEl.textContent = translateKey(key, mode);
-      }
-
-      try {
-        var u = new URL(linkEl.href, window.location.href);
-        u.searchParams.set('lang', mode);
-        linkEl.setAttribute('href', u.search);
-      } catch (e) {}
-    });
-  }
-
-  function showTip(el, clientX, clientY) {
-    if (!window.nomatoraTipEnabled) return;
-    var txt = el.dataset.tip;
-    if (!txt) return;
-    tipEl.textContent = txt;
-    tipEl.classList.add('is-visible');
-    var x = Math.min(window.innerWidth - tipEl.offsetWidth - 10, Math.max(8, clientX - 10));
-    var y = Math.max(8, clientY - tipEl.offsetHeight - 14);
-    tipEl.style.left = x + 'px';
-    tipEl.style.top = y + 'px';
-  }
-  function hideTip() {
-    tipEl.classList.remove('is-visible');
-  }
-
-  document.addEventListener('mouseover', function(e) {
-    var link = e.target.closest('.dy-link');
-    if (link) {
-      var rect = link.getBoundingClientRect();
-      showTip(link, rect.left, rect.top);
-    }
-  });
-  document.addEventListener('mouseout', function(e) {
-    if (e.target.closest('.dy-link')) hideTip();
-  });
-  document.addEventListener('touchstart', function(e) {
-    var link = e.target.closest('.dy-link');
-    if (link && e.touches && e.touches[0]) {
-      showTip(link, e.touches[0].clientX, e.touches[0].clientY);
-    } else {
-      hideTip();
-    }
-  }, { passive: true });
-
-  langSelect.addEventListener('change', applyDisplayModes);
-  dupeSelect.addEventListener('change', applyDisplayModes);
-
-  applyDisplayModes();
-  setTimeout(applyDisplayModes, 50);
+if (gachaArea) {
+gachaArea.appendChild(cfgWrap);
+}
+var popEl = document.getElementById('gacha-cfg-pop');
+var listEl = document.getElementById('gacha-cfg-list');
+function applyGachaLayout() {
+if (!gachaArea) return;
+var orderCodes = gachaCfgList.map(function(item) { return item.code; });
+gachaCfgList.forEach(function(item) {
+var lbl = labelMap[item.code];
+if (lbl) {
+lbl.style.display = item.visible ? 'inline-block' : 'none';
+gachaArea.insertBefore(lbl, cfgWrap);
+}
+});
+document.querySelectorAll('.dy-maint').forEach(function(maint) {
+var rows = Array.from(maint.querySelectorAll('.dy-row'));
+if (!rows.length) return;
+var headCols = Array.from(rows[0].querySelectorAll('.dy-data-col'));
+var currentKeys = headCols.map(function(el) {
+if (el.dataset.gachaKey) return el.dataset.gachaKey;
+var raw = el.textContent.trim();
+var resolved = GACHA_KEY_RESOLVER[raw] || '';
+if (resolved) el.dataset.gachaKey = resolved;
+return resolved;
+});
+var orderKeys = orderCodes.map(function(c) { return CODE_TO_KEY[c]; });
+var sortedIndices = currentKeys
+.map(function(k, idx) {
+var pos = orderKeys.indexOf(k);
+return { idx: idx, pos: pos === -1 ? 999 : pos };
+})
+.sort(function(a, b) { return a.pos - b.pos; })
+.map(function(o) { return o.idx; });
+rows.forEach(function(row) {
+var dataCols = Array.from(row.querySelectorAll('.dy-data-col'));
+if (dataCols.length !== sortedIndices.length) return;
+sortedIndices.forEach(function(origIdx) {
+row.appendChild(dataCols[origIdx]);
+});
+});
+});
+}
+var dragSrcIdx = null;
+function moveGachaItem(fromIdx, toIdx) {
+if (fromIdx === toIdx || toIdx < 0 || toIdx >= gachaCfgList.length) return;
+var moved = gachaCfgList.splice(fromIdx, 1)[0];
+gachaCfgList.splice(toIdx, 0, moved);
+saveGachaCfg(gachaCfgList);
+renderGachaCfgList();
+applyGachaLayout();
+}
+function renderGachaCfgList() {
+if (!listEl) return;
+var mode = langSelect.value;
+listEl.innerHTML = '';
+gachaCfgList.forEach(function(item, idx) {
+var gKey = CODE_TO_KEY[item.code];
+var dispName = translateKey(gKey, mode);
+var li = document.createElement('li');
+li.className = 'gacha-cfg-item';
+li.draggable = true;
+li.dataset.idx = idx;
+li.innerHTML =
+  '<div class="gacha-cfg-left">' +
+    '<span class="gacha-cfg-grip">☰</span>' +
+    '<input type="checkbox" ' + (item.visible ? 'checked' : '') + '>' +
+    '<span>' + dispName + '</span>' +
+  '</div>' +
+  '<div class="gacha-cfg-arrows">' +
+    '<button type="button" class="btn-up">▲</button>' +
+    '<button type="button" class="btn-dn">▼</button>' +
+  '</div>';
+var cb = li.querySelector('input[type="checkbox"]');
+cb.addEventListener('change', function() {
+gachaCfgList[idx].visible = cb.checked;
+saveGachaCfg(gachaCfgList);
+applyGachaLayout();
+});
+li.querySelector('.btn-up').addEventListener('click', function() { moveGachaItem(idx, idx - 1); });
+li.querySelector('.btn-dn').addEventListener('click', function() { moveGachaItem(idx, idx + 1); });
+li.addEventListener('dragstart', function(e) {
+dragSrcIdx = idx;
+li.classList.add('is-dragging');
+e.dataTransfer.effectAllowed = 'move';
+});
+li.addEventListener('dragend', function() {
+li.classList.remove('is-dragging');
+});
+li.addEventListener('dragover', function(e) {
+e.preventDefault();
+e.dataTransfer.dropEffect = 'move';
+});
+li.addEventListener('drop', function(e) {
+e.preventDefault();
+if (dragSrcIdx !== null && dragSrcIdx !== idx) {
+moveGachaItem(dragSrcIdx, idx);
+}
+});
+li.addEventListener('touchstart', function(e) {
+if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
+dragSrcIdx = idx;
+li.classList.add('is-dragging');
+}, { passive: true });
+li.addEventListener('touchmove', function(e) {
+if (dragSrcIdx === null) return;
+var touch = e.touches[0];
+var target = document.elementFromPoint(touch.clientX, touch.clientY);
+var overLi = target ? target.closest('.gacha-cfg-item') : null;
+if (overLi && overLi.dataset.idx !== undefined) {
+var overIdx = parseInt(overLi.dataset.idx, 10);
+if (overIdx !== dragSrcIdx) {
+moveGachaItem(dragSrcIdx, overIdx);
+dragSrcIdx = overIdx;
+}
+}
+}, { passive: true });
+li.addEventListener('touchend', function() {
+dragSrcIdx = null;
+li.classList.remove('is-dragging');
+});
+listEl.appendChild(li);
+});
+}
+if (document.getElementById('gacha-cfg-toggle')) {
+document.getElementById('gacha-cfg-toggle').addEventListener('click', function(e) {
+e.stopPropagation();
+popEl.classList.toggle('is-open');
+if (popEl.classList.contains('is-open')) {
+var rect = popEl.getBoundingClientRect();
+if (rect.right > window.innerWidth - 8) {
+popEl.style.left = 'auto';
+popEl.style.right = '0';
+} else {
+popEl.style.left = '0';
+popEl.style.right = 'auto';
+}
+}
+});
+document.getElementById('gacha-cfg-close').addEventListener('click', function() {
+popEl.classList.remove('is-open');
+});
+document.addEventListener('click', function(e) {
+if (!cfgWrap.contains(e.target)) popEl.classList.remove('is-open');
+});
+document.getElementById('gacha-cfg-reset').addEventListener('click', function() {
+gachaCfgList = JSON.parse(JSON.stringify(DEFAULT_GACHA_LIST));
+saveGachaCfg(gachaCfgList);
+renderGachaCfgList();
+applyGachaLayout();
+});
+}
+function applyDisplayModes() {
+var mode = langSelect.value;
+var dupeMode = dupeSelect.value;
+localStorage.setItem(MODE_KEY, mode);
+localStorage.setItem(DUPE_KEY, dupeMode);
+var container = document.querySelector('.ally-gem');
+if (container) {
+container.classList.remove(
+'mode-ja', 'mode-short1', 'mode-short2', 'mode-en',
+'dupe-arrow', 'dupe-comma', 'dupe-bang'
+);
+container.classList.add('mode-' + mode, 'dupe-' + dupeMode);
+}
+form.querySelectorAll('input[name="nomagachas_selected"]').forEach(function(cb) {
+var gachaKey = GACHA_KEY_RESOLVER[cb.value];
+if (!gachaKey) return;
+var lbl = cb.closest('label');
+if (!lbl) return;
+var textNode = Array.from(lbl.childNodes).find(function(n) {
+return n.nodeType === Node.TEXT_NODE && n.textContent.trim().length > 0;
+});
+var labelText = ' ' + translateKey(gachaKey, mode);
+if (textNode) {
+textNode.textContent = labelText;
+} else {
+lbl.appendChild(document.createTextNode(labelText));
+}
+});
+document.querySelectorAll('.dy-head.dy-data-col').forEach(function(headEl) {
+var gachaKey = headEl.dataset.gachaKey;
+if (!gachaKey) {
+var raw = headEl.textContent.trim();
+gachaKey = GACHA_KEY_RESOLVER[raw];
+if (gachaKey) headEl.dataset.gachaKey = gachaKey;
+}
+if (gachaKey) {
+headEl.textContent = translateKey(gachaKey, mode);
+}
+});
+document.querySelectorAll('.dycell .dy-link').forEach(function(linkEl) {
+var key = linkEl.dataset.unitKey;
+if (!key) {
+try {
+var href = linkEl.getAttribute('href') || '';
+var m = href.match(/[?&]lastCat=([^&]+)/);
+if (m && m[1]) key = decodeURIComponent(m[1]);
+} catch (e) {}
+if (key) linkEl.dataset.unitKey = key;
+}
+var btmCell = linkEl.closest('.dycell-btm');
+var destSpan = btmCell ? btmCell.querySelector('.dy-dest') : null;
+var tipUnitName = key ? translateTipName(key) : linkEl.textContent.trim();
+if (destSpan) {
+var origDest = destSpan.dataset.origDest;
+if (!origDest) {
+origDest = destSpan.textContent.trim();
+destSpan.dataset.origDest = origDest;
+}
+linkEl.dataset.tip = tipUnitName + origDest;
+if (dupeMode === 'bang') {
+destSpan.style.display = 'none';
+linkEl.textContent = '!';
+} else if (dupeMode === 'comma') {
+var destNum = origDest.replace(/\D/g, '');
+destSpan.style.display = 'inline';
+destSpan.textContent = ',' + destNum;
+if (key) linkEl.textContent = translateKey(key, mode);
+} else {
+destSpan.style.display = 'inline';
+destSpan.textContent = origDest;
+if (key) linkEl.textContent = translateKey(key, mode);
+}
+} else {
+linkEl.dataset.tip = tipUnitName;
+if (key) linkEl.textContent = translateKey(key, mode);
+}
+try {
+var u = new URL(linkEl.href, window.location.href);
+u.searchParams.set('lang', mode);
+linkEl.setAttribute('href', u.search);
+} catch (e) {}
+});
+renderGachaCfgList();
+applyGachaLayout();
+}
+function showTip(el, clientX, clientY) {
+if (!window.nomatoraTipEnabled) return;
+var txt = el.dataset.tip;
+if (!txt) return;
+tipEl.textContent = txt;
+tipEl.classList.add('is-visible');
+var x = Math.min(window.innerWidth - tipEl.offsetWidth - 10, Math.max(8, clientX - 10));
+var y = Math.max(8, clientY - tipEl.offsetHeight - 14);
+tipEl.style.left = x + 'px';
+tipEl.style.top = y + 'px';
+}
+function hideTip() {
+tipEl.classList.remove('is-visible');
+}
+document.addEventListener('mouseover', function(e) {
+var link = e.target.closest('.dy-link');
+if (link) {
+var rect = link.getBoundingClientRect();
+showTip(link, rect.left, rect.top);
+}
+});
+document.addEventListener('mouseout', function(e) {
+if (e.target.closest('.dy-link')) hideTip();
+});
+document.addEventListener('touchstart', function(e) {
+var link = e.target.closest('.dy-link');
+if (link && e.touches && e.touches[0]) {
+showTip(link, e.touches[0].clientX, e.touches[0].clientY);
+} else {
+hideTip();
+}
+}, { passive: true });
+langSelect.addEventListener('change', applyDisplayModes);
+dupeSelect.addEventListener('change', applyDisplayModes);
+applyDisplayModes();
+setTimeout(applyDisplayModes, 50);
 });
 </script>
-
-
